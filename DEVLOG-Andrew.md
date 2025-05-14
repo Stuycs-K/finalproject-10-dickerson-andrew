@@ -2,10 +2,14 @@
 
 This document must be updated daily every time you finish a work session.
 
-## Amy Smith CHANGE THE NAME FOOL!
+## Andrew Dickerson
 
-### 2024-01-02 - Brief description
-Expanded description including how much time was spent on task.
+### 2025-05-14 - Planning and Outlining
+Made first draft of proposal, timeline, and prospected workflow.
+Added necessary components from image_processing lab.
 
-### 2024-01-03 - Brief description
-Expanded description including how much time was spent on task.
+### 2025-05-15 - ...
+...
+
+### 2025-05-16 - ...
+...
