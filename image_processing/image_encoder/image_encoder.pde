@@ -11,8 +11,9 @@ final static int FILE = 2;
 int MODE = GREEDY;
 String PLAINTEXT = "This";
 String DISPLAYMODE = "false";
-String INPUTFILENAME="input.png";
+String INPUTFILENAME="dark.png";
 String OUTPUTFILENAME="encoded.png";
+PImage img; 
 //the parseArgs function will set these to non-defaults
 
 void draw(){
@@ -37,7 +38,14 @@ void setup() {
   }
 
   //println("Attempting to load image.");
-  PImage img = loadImage(INPUTFILENAME);
+  if(INPUTFILENAME.equals("dark.png")){
+    img = createImage(width, height, RGB);
+    for (int i = 0; i < img.pixels.length; i++) {
+      img.pixels[i] = color(0, 0, 0); 
+    }
+  }else{
+    img = loadImage(INPUTFILENAME);
+  }
 
   //2. Write the MESSAGETOARRAY method
   //convert the string into an array of ints in the range 0-3
@@ -252,6 +260,7 @@ int []fileToArray(String filename) {
   return messageToArray(content);
 }
 
+// OLD TEST CASES:
 // make encode ARGS="-i input.png -o outputGreedy.png -m GREEDY -d TRUE -p 'I am embedding a message within this image.'"
 // make encode ARGS="-i input.png -o outputGreedy.png -m GREEDY -d TRUE -p 'I am already far north of London, and as I walk in the streets of Petersburgh, I feel a cold northern breeze play upon my cheeks, which braces my nerves and fills me with delight. Do you understand this feeling? This breeze, which has travelled from the regions towards which I am advancing, gives me a foretaste of those icy climes.'"
 
@@ -261,3 +270,13 @@ int []fileToArray(String filename) {
 
 // make copy ARGS="outputGreedy.png"
 // make copy ARGS="outputSelective.png"
+
+// NEW TEST CASES:
+// make encode ARGS="-i dark.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message\!'"
+// make encode ARGS="-i dark.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message.'"
+
+// make encode ARGS="-i dark.png -o outputSelective.png -m SELECTIVE -d TRUE -p 'Oh look, a hidden message!'"
+// NUM_BITS = 344 for above msg
+// make encode ARGS="-i dark.png -o outputSelectivePi.png -m GREEDY -d TRUE -p 'Oh look, a hidden message!'"
+
+// make copy ARGS="encoded.png"
