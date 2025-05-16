@@ -40,9 +40,12 @@ void setup() {
   //println("Attempting to load image.");
   if(INPUTFILENAME.equals("dark.png")){
     img = createImage(width, height, RGB);
+    img.loadPixels();
     for (int i = 0; i < img.pixels.length; i++) {
       img.pixels[i] = color(0, 0, 0); 
     }
+    img.loadPixels();
+    save("dark.png");
   }else{
     img = loadImage(INPUTFILENAME);
   }
@@ -260,18 +263,6 @@ int []fileToArray(String filename) {
   return messageToArray(content);
 }
 
-// OLD TEST CASES:
-// make encode ARGS="-i input.png -o outputGreedy.png -m GREEDY -d TRUE -p 'I am embedding a message within this image.'"
-// make encode ARGS="-i input.png -o outputGreedy.png -m GREEDY -d TRUE -p 'I am already far north of London, and as I walk in the streets of Petersburgh, I feel a cold northern breeze play upon my cheeks, which braces my nerves and fills me with delight. Do you understand this feeling? This breeze, which has travelled from the regions towards which I am advancing, gives me a foretaste of those icy climes.'"
-
-// make encode ARGS="-i input.png -o outputSelective.png -m SELECTIVE -d TRUE -p 'Hello everyone. 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100'"
-// NUM_BITS = 344 for above msg
-// make encode ARGS="-i input.png -o outputSelectivePi.png -m GREEDY -d TRUE -p 'I am already far north of London, and as I walk in the streets of Petersburgh, I feel a cold northern breeze play upon my cheeks, which braces my nerves and fills me with delight. Do you understand this feeling? This breeze, which has travelled from the regions towards which I am advancing, gives me a foretaste of those icy climes.'"
-
-// make copy ARGS="outputGreedy.png"
-// make copy ARGS="outputSelective.png"
-
-// NEW TEST CASES:
 // make encode ARGS="-i dark.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message\!'"
 // make encode ARGS="-i dark.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message.'"
 

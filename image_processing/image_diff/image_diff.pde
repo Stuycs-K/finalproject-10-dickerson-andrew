@@ -155,6 +155,5 @@ boolean parseArgs(){
   return true;
 }
 
-// make diff ARGS="-m cat.png -o modifiedCat.png"
-// make diff ARGS="-m catTwo.png -o catTwoSelective.png"
-// make diff ARGS="-m space_modified.png -o space_og.png"
+// make diff ARGS="-m encoded.png -o dark.png"
+// make diff ARGS="-m encoded.png -o dark_manual.png"

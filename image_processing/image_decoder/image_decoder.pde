@@ -186,11 +186,5 @@ boolean parseArgs(){
 }
 
 
-// make decode ARGS="-i outputGreedy.png -m GREEDY -d TRUE"
-// make decode ARGS="-i outputSelective.png -m SELECTIVE -d TRUE -b 344"
-
-// make decode ARGS="-i catWithMessage.png -m GREEDY -d TRUE"
-
-// make decode ARGS="-i catTwoSelective.png -m SELECTIVE -d TRUE -b 2447"
-// make decode ARGS="-i modifiedCatSELECTIVE.png -m SELECTIVE -d TRUE -b 1625"
-// make decode ARGS="-i output.png -m SELECTIVE -d TRUE"
+// make decode ARGS="-i encoded.png -m GREEDY -d TRUE"
+// make decode ARGS="-i encoded.png -m SELECTIVE -d TRUE"
