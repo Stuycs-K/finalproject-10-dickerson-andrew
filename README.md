@@ -46,7 +46,6 @@ Audio Decoder - Finds a message hidden in an audio file.
 make flags:
 - -i : input audio path (default = "obv.wav")
 - -o : output audio path (default = "encoded.wav")
-- -p : plaintext message or text file name (default = "This is a hidden message.")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
