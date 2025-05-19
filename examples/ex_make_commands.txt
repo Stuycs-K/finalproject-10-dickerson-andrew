@@ -1,7 +1,23 @@
-make encode ARGS="-i image.png -o encoded.png -m secret.txt -d true -iP image_processing/image_encoder/encoded.png -iA audio.wav -o output.wav"
+Full Encoder (runs both image and audio on the same args):
+make encode ARGS="-i examples/cat.png -oP encoded_cat.png -p examples/secret.txt -m GREEDY -d true -iP image_processing/image_encoder/encoded_cat.png -iA oxp.wav -oA ex_full_output.wav"
+make encode ARGS="-i examples/cat.png -oP encoded_cat.png -p examples/secret.txt -m SELECTIVE -d true -iP image_processing/image_encoder/encoded_cat.png -iA oxp.wav -oA ex_full_output.wav"
 
-> make audio_encode ARGS="-i input.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message\!'"
-> make audio_encode ARGS="-i input.png -o encoded.png -m SELECTIVE -d TRUE -p 'Oh look, a hidden message\!'"
+Full Decoder (runs both image and audio on the same args):
+make encode ARGS="-i examples/encoded.wav -oP ex_full_hidden.png -o ex_full_decoded.txt -m GREEDY -d TRUE"
+make encode ARGS="-i examples/encoded.wav -oP ex_full_hidden.png -o ex_full_decoded.txt -m SELECTIVE -d TRUE"
 
-> make audio_decode ARGS="-i encoded.mp3 -m GREEDY -d TRUE"
-> make audio_decode ARGS="-i encoded.mp3 -m SELECTIVE -d TRUE"
+Only Image Encoder:
+make image_encode ARGS="-i examples/cat.png -o encoded_cat.png -p examples/secret.txt -m GREEDY -d TRUE"
+make image_encode ARGS="-i examples/cat.png -o encoded_cat.png -p examples/secret.txt -m SELECTIVE -d TRUE"
+
+Only Image Decoder:
+make image_encode ARGS="-i examples/cat.png -o message.txt -m GREEDY -d TRUE"
+make image_encode ARGS="-i examples/cat.png -o message.txt -m SELECTIVE -d TRUE"
+
+Only Audio Encoder:
+make audio_encode ARGS="-i examples/pre_encoded_cat.png -m examples/secret.txt -d true -iP image_processing/image_encoder/encoded_cat.png -iA oxp.wav -o ex_aud_output.wav"
+make audio_encode ARGS="-i encoded.mp3 -m SELECTIVE -d TRUE"
+
+Only Audio Decoder:
+make audio_decode ARGS="-i encoded.mp3 -m GREEDY -d TRUE"
+make audio_decode ARGS="-i encoded.mp3 -m SELECTIVE -d TRUE"
