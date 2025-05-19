@@ -1,0 +1,1 @@
+make encode ARGS="-i image.png -m message.txt -o encoded.png -d -iP image_processing/image_encoder/encoded.png -iA audio.wav -o output.wav"
