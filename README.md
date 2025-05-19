@@ -17,25 +17,40 @@ The decoder works essentially by doing everything in reverse. It takes the alter
 How does the user install/compile/run the program. (CHANGE THIS!!!!!)
 How does the user interact with this program? (CHANGE THIS!!!!!)
 
-Flags for make audio_encode:
-- -iP : input (Picture) file that will be used as the base image to house the encoded message
-- -iA : input (Audio) file that will be used as the base audio to house the encoded message
-- -o : output file for which the final encrypted audio file will be stored as
-- -m : mode of encryption by which the message is being encoded (GREEDY / SELECTIVE / FILE)
-- -p : message that is being encoded
+Image Encoder - Hides message from plaintext or file in an image.
+make flags:
+- -i : input image path (default = none, a blank, black iamge will be generated for use instead)
+- -o : output image path (default = "encoded.png")
+- -p : plaintext message or text file name (required; default = "secret.txt")
+- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
+- -d : display image after encoding ("true"/"false", default = "false")
 
-Flags for make audio_decode:
-- -i : input (Picture) file that will be decoded
-- -o : (optional) output file for which the decrypted message will be stored as
-- -m : mode of encryption by which the message is being decoded (GREEDY / SELECTIVE / FILE)
+Image Decoder - Finds a message hidden in an image.
+make flags:
+- -i : input image path (default = none, a blank, black iamge will be generated for use instead)
+- -o : output image path (default = "encoded.png")
+- -p : plaintext message or text file name (required; default = "secret.txt")
+- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
+- -d : display image after encoding ("true"/"false", default = "false")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
-Suggested Example Commands:
-> make audio_encode ARGS="-i input.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message\!'"
-> make audio_encode ARGS="-i input.png -o encoded.png -m SELECTIVE -d TRUE -p 'Oh look, a hidden message\!'"
+Audio Encoder - Hides message from plaintext or file in an audio file.
+make flags:
+- -iP : input image path (default = none, a blank, black iamge will be generated for use instead)
+- -iA : input image path (default = "oxp.wav")
+- -o : output audio path (default = "encoded.wav")
+- -p : plaintext message or text file name (default = "This is a hidden message.")
+- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 
-> make audio_decode ARGS="-i encoded.mp3 -m GREEDY -d TRUE"
-> make audio_decode ARGS="-i encoded.mp3 -m SELECTIVE -d TRUE"
+Audio Decoder - Finds a message hidden in an audio file.
+make flags:
+- -i : input audio path (default = "obv.wav")
+- -o : output audio path (default = "encoded.wav")
+- -p : plaintext message or text file name (default = "This is a hidden message.")
+- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
+- -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
+
+For Example Make Commands, see `examples/ex_make_commands`
 
 ### Resources/ References:
 
