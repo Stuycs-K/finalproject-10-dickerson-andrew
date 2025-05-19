@@ -1,1 +1,7 @@
 make encode ARGS="-i image.png -o encoded.png -m secret.txt -d true -iP image_processing/image_encoder/encoded.png -iA audio.wav -o output.wav"
+
+> make audio_encode ARGS="-i input.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message\!'"
+> make audio_encode ARGS="-i input.png -o encoded.png -m SELECTIVE -d TRUE -p 'Oh look, a hidden message\!'"
+
+> make audio_decode ARGS="-i encoded.mp3 -m GREEDY -d TRUE"
+> make audio_decode ARGS="-i encoded.mp3 -m SELECTIVE -d TRUE"
