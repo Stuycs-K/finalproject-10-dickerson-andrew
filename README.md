@@ -17,8 +17,27 @@ The decoder works essentially by doing everything in reverse. It takes the alter
 How does the user install/compile/run the program. (CHANGE THIS!!!!!)
 How does the user interact with this program? (CHANGE THIS!!!!!)
 
+Full Encoder - Hides message from plaintext or file in an image and then hides that image in an audio file.
+make encode:
+- -iP : input image path (default = none, a blank, black iamge will be generated for use instead)
+- -oP : output image path (default = "encoded.png")
+- -iM : intermediate image path; input image path for audio encoding (default = path specified in -oP)
+- -iA : input image path (default = "examples/oxp.wav")
+- -oA : output audio path (default = "examples/encoded.wav")
+- -p : plaintext message or text file name (default = "examples/secret.txt")
+- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
+- -d : display image after encoding ("true"/"false", default = "false")
+
+Full Encoder - Finds an image hidden in an audio file, and then the message hidden in that image.
+make encode:
+- -i : input audio path (default = "obv.wav")
+- -o : output audio path (default = "encoded.wav")
+- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
+- -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
+- -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
+
 Image Encoder - Hides message from plaintext or file in an image.
-make flags:
+make image_encode:
 - -i : input image path (default = none, a blank, black iamge will be generated for use instead)
 - -o : output image path (default = "encoded.png")
 - -p : plaintext message or text file name (required; default = "secret.txt")
@@ -26,7 +45,7 @@ make flags:
 - -d : display image after encoding ("true"/"false", default = "false")
 
 Image Decoder - Finds a message hidden in an image.
-make flags:
+make image_decode:
 - -i : input image path (default = none, a blank, black iamge will be generated for use instead)
 - -o : output image path (default = "encoded.png")
 - -p : plaintext message or text file name (required; default = "secret.txt")
@@ -35,15 +54,15 @@ make flags:
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
 Audio Encoder - Hides message from plaintext or file in an audio file.
-make flags:
+make audio_encode:
 - -iP : input image path (default = none, a blank, black iamge will be generated for use instead)
 - -iA : input image path (default = "oxp.wav")
 - -o : output audio path (default = "encoded.wav")
-- -p : plaintext message or text file name (default = "This is a hidden message.")
+- -p : plaintext message or text file name (default = "examples/secret.txt")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 
 Audio Decoder - Finds a message hidden in an audio file.
-make flags:
+make audio_decode:
 - -i : input audio path (default = "obv.wav")
 - -o : output audio path (default = "encoded.wav")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
