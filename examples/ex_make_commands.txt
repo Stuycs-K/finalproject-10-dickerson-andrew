@@ -11,8 +11,8 @@ make image_encode ARGS="-i examples/cat.png -o encoded_cat.png -p examples/secre
 make image_encode ARGS="-i examples/cat.png -o encoded_cat.png -p examples/secret.txt -m SELECTIVE -d TRUE"
 
 Only Image Decoder:
-make image_encode ARGS="-i examples/cat.png -o message.txt -m GREEDY -d TRUE"
-make image_encode ARGS="-i examples/cat.png -o message.txt -m SELECTIVE -d TRUE"
+make image_decode ARGS="-i encoded_cat.png -o message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i encoded_cat.png -o message.txt -m SELECTIVE -d TRUE"
 
 Only Audio Encoder:
 make audio_encode ARGS="-iP examples/pre_encoded_cat.png -iA oxp.wav -o ex_aud_output.wav -p examples/secret.txt -m GREEDY"
