@@ -55,18 +55,14 @@ make image_decode:
 
 Audio Encoder - Hides message from plaintext or file in an audio file.
 make audio_encode:
-- -iP : input image path (default = none, a blank, black image will be generated for use instead)
+- -iP : input image path (default = "encoded.png")
 - -iA : input image path (default = "oxp.wav")
 - -o : output audio path (default = "encoded.wav")
-- -p : plaintext message or text file name (default = "examples/secret.txt")
-- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 
 Audio Decoder - Finds a message hidden in an audio file.
 make audio_decode:
 - -i : input audio path (default = "obv.wav")
 - -o : output audio path (default = "encoded.wav")
-- -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
-- -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
 For Example Make Commands, see `examples/ex_make_commands`
 
