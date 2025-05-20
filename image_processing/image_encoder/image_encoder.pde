@@ -24,121 +24,77 @@ void draw(){
 }
 
 void setup() {
-  size(1200, 600);
-
-  if(args==null){
-    println("no arguments provided");
-    println("flags: -i INPUTFILENAME -o OUTPUTFILENAME -p PLAINTEXT (text or filename depending on mode) -d DISPLAYMODE (true/false) -m MODE (GREEDY/SELECTIVE/FILE)");
-    return;
+  if (args == null || !parseArgs()) {
+    println("Invalid or missing arguments.");
+    println("Usage: -i input.png -o output.png -p 'message_here' -d true -m MODE");
+    exit();
+  return;
   }
 
-  if(!parseArgs()){
-    println("Parsing argument error;");
-    return;
+  if (INPUTFILENAME.equals("")) {
+    println("No input image provided, generating blank 1200x600 image.");
+    img = createImage(1200, 600, RGB);
+    img.loadPixels();
+  for (int i = 0; i < img.pixels.length; i++) {
+    img.pixels[i] = color(0, 0, 0);
   }
-
-  //println("Attempting to load image.");
-  if(INPUTFILENAME.equals("dark.png")){
-    img = createImage(width, height, RGB);
-    img.loadPixels();
-    for (int i = 0; i < img.pixels.length; i++) {
-      img.pixels[i] = color(0, 0, 0); 
-    }
-    img.loadPixels();
-    save("dark.png");
-  }else{
+    img.updatePixels();
+  } else {
     img = loadImage(INPUTFILENAME);
   }
 
-  //2. Write the MESSAGETOARRAY method
-  //convert the string into an array of ints in the range 0-3
-  //println("Attempting to create part array.");
-  int parts[];
-  if(MODE==FILE){
-    //in file mode, the plaintext is a filename
-    parts = fileToArray(PLAINTEXT);
-  }else{
-    parts = messageToArray(PLAINTEXT);
-  }
-
-  //3. Write the MODIFY method.
-  //println("Attempting to modify image.");
+  int[] parts = (MODE == FILE) ? fileToArray(PLAINTEXT) : messageToArray(PLAINTEXT);
   modifyImage(img, parts);
-
-  //save the modified image to disk.
-  //println("Attempting to save image.");
   img.save(OUTPUTFILENAME);
 
-  if(!DISPLAYMODE.equalsIgnoreCase("FALSE")){
-    //println("Displaying image.");
-    image(img,0,0);
+  if (DISPLAYMODE.equalsIgnoreCase("true")) {
+    size(img.width, img.height);
+    image(img, 0, 0);
+  } else {
+    exit();
   }
 }
 
-boolean parseArgs(){
-  if (args != null) {
-    for (int i = 0; i < args.length; i++){
-      if(args[i].equals("-i")){
-        try{
-          INPUTFILENAME=args[i+1];
-        }catch(Exception e){
-          println("-o requires filename as next argument");
-          return false;
-        }
-      }
+void settings() {
+  PImage temp;
+  if (args != null && parseArgs()) {
+    if (INPUTFILENAME.equals("")) {
+      size(1200, 600);
+    } else {
+      temp = loadImage(INPUTFILENAME);
+      size(temp.width, temp.height);
+    }
+  } else {
+  size(1200, 600);
+  }
+}
 
-      if(args[i].equals("-p")){
-        try{
-          PLAINTEXT=args[i+1];
-        }catch(Exception e){
-          println("-p requires quoted plaintext as next argument");
-          return false;
-        }
-      }
-
-      if(args[i].equals("-o")){
-        if(args[i+1]!=null){
-          OUTPUTFILENAME=args[i+1];
-        }else{
-          println("-o requires filename as next argument");
-          return false;
-        }
-      }
-
-      if(args[i].equals("-d")){
-        if(args[i+1]!=null){
-          DISPLAYMODE=args[i+1];
-        }else{
-          println("-d requires true/false as next argument");
-          return false;
-        }
-      }
-
-      if(args[i].equals("-m")){
-        if(args[i+1]!=null){
-          String modeString=args[i+1];
-          if(modeString.equalsIgnoreCase("greedy")){
-            MODE = GREEDY;
-          }else if(modeString.equalsIgnoreCase("selective")){
-            MODE = SELECTIVE;
-          }else if(modeString.equalsIgnoreCase("file")){
-            MODE = FILE;
-          }else{
-            println("Invalid mode choice, defaulting to Greedy");
-            MODE = GREEDY;
-          }
-
-        }else{
-          println("-m requires mode as next argument");
-          return false;
-        }
+boolean parseArgs() {
+  for (int i = 0; i < args.length; i++) {
+    if (args[i].equals("-i") && i + 1 < args.length) {
+      INPUTFILENAME = args[++i];
+    } else if (args[i].equals("-o") && i + 1 < args.length) {
+      OUTPUTFILENAME = args[++i];
+    } else if (args[i].equals("-p") && i + 1 < args.length) {
+      PLAINTEXT = args[++i];
+    } else if (args[i].equals("-d") && i + 1 < args.length) {
+      DISPLAYMODE = args[++i];
+    } else if (args[i].equals("-m") && i + 1 < args.length) {
+      String mode = args[++i].toLowerCase();
+      if (mode.equals("greedy")) {
+        MODE = GREEDY;
+      } else if (mode.equals("selective")) {
+         MODE = SELECTIVE;
+      } else if (mode.equals("file")) {
+        MODE = FILE;
+      } else {
+        println("Invalid mode, defaulting to GREEDY.");
+        MODE = GREEDY;
       }
     }
   }
-  return true;
+  return (PLAINTEXT != null && PLAINTEXT.length() > 0);
 }
-
-
 
 void modifyImage(PImage img, int[]messageArray) {
   //int usable_pixels = 0;
