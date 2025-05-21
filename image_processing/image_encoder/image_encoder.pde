@@ -218,12 +218,3 @@ int []fileToArray(String filename) {
     }
   return messageToArray(content);
 }
-
-// make encode ARGS="-i dark.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message\!'"
-// make encode ARGS="-i dark.png -o encoded.png -m GREEDY -d TRUE -p 'Oh look, a hidden message.'"
-
-// make encode ARGS="-i dark.png -o outputSelective.png -m SELECTIVE -d TRUE -p 'Oh look, a hidden message!'"
-// NUM_BITS = 344 for above msg
-// make encode ARGS="-i dark.png -o outputSelectivePi.png -m GREEDY -d TRUE -p 'Oh look, a hidden message!'"
-
-// make copy ARGS="encoded.png"

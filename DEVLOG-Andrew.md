@@ -22,3 +22,7 @@ This document must be updated daily every time you finish a work session.
 - Fixed example make commands.
 - Made data directory for file transfer between sketches.
 
+### 2025-05-20 - 
+- Revised setup, parseargs, and created settings for image_encoder to smooth transition into audio_encoder
+- Removed excess flags in example make commands and in the README instructions
+- Started setup and converting image to bytes for audio_encoder
