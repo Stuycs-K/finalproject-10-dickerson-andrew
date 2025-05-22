@@ -4,30 +4,40 @@ This document must be updated daily every time you finish a work session.
 
 ## Andrew Dickerson
 
-### 2025-05-14 - Planning and outlining
+### 2025-05-14 - Planning and outlining.
 - Made first draft of proposal, timeline, and prospected workflow.
 - Added necessary components from `image_processing` lab.
 
-### 2025-05-15 - Linking `image_processing` and `audio_processing` sketches
+### 2025-05-15 - Linking `image_processing` and `audio_processing` sketches.
 - Fixed `image_processing` to work with future audio encoding implementation. Changed paths to fix makefile to work in context of project.
 
-### 2025-05-18 - Setting up makefile and test files
+### 2025-05-18 - Setting up makefile and test files.
 - Created example files for testing and demonstration purposes. 
 - Fixed issue with image copying.
 - Fixed encode to run both audio and image encoding with copied image.
 
-### 2025-05-19 - Flag documentation
-- Added comprehensive flag documentation for running makefile commands for each component of the project
+### 2025-05-19 - Flag documentation.
+- Added comprehensive flag documentation for running makefile commands for each component of the project.
 - Commented the makefile, added a clean command.
 - Fixed example make commands.
 - Made data directory for file transfer between sketches.
 
 ### 2025-05-20 - Setup for image and audio encoder.
-- Revised setup, parseargs, and created settings for `image_encoder` to smooth transition into audio_encoder
-- Removed excess flags in example make commands and in the README instructions
-- Started setup and converting image to bits for `audio_encoder`
+- Revised setup, parseargs, and created settings for `image_encoder` to smooth transition into audio_encoder.
+- Removed excess flags in example make commands and in the README instructions.
+- Started setup and converting image to bits for `audio_encoder`.
 
-### 2025-05-21 - Issues installing sound library for `audio_encoder`
-- Library installed in processing but unable to be found after running make command, not sure how to fix this yet
-- Minor tweaks to DEVLOG format
-- Change file organization within `audio_processing` sketch
+### 2025-05-21 - Issues installing sound library for `audio_encoder`.
+- Library installed in processing but unable to be found after running make command, not sure how to fix this yet.
+- Otherwise, wrote prelimnary methods for `audio_encoder`.
+- Minor tweaks to DEVLOG format.
+- Change file organization within `audio_processing` sketch.
+
+
+### 2025-05-22 - Saved an audio file with `audio_encoder`.
+- Library seems to work fine on lab machine, not sure what the issue is on personal device.
+- Fixed save destination for example command for `audio_encoder`.
+- Successfully saved file after encoding audio, unable to test without decoder though. 
+- Removed PROPOSAL.md as directed on piazza.
+
+

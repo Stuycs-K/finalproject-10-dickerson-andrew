@@ -11,7 +11,7 @@ Only Image Decoder:
 make image_decode ARGS="-i encoded_cat.png -o message.txt -m GREEDY -d TRUE"
 
 Only Audio Encoder:
-make audio_encode ARGS="-iP examples/encoded_cat.png -iA examples/oxp.wav -o ../../examples/ex_audio_encoded.wav"
+make audio_encode ARGS="-iP examples/encoded_cat.png -iA ../../examples/oxp.wav -o ../../examples/ex_audio_encoded.wav"
 
 Only Audio Decoder:
 make audio_decode ARGS="-i examples/ex_audio_encoded.wav -o ../../examples/decoded.txt"

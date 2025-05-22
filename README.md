@@ -58,7 +58,7 @@ make audio_encode:
 - -iP : input image path (default = "encoded.png")
 - -iA : input image path (default = "oxp.wav")
 - -o : output audio path (default = "encoded.wav")
-- -d : display image after encoding ("true"/"false", default = "false")
+- -d : display wave after encoding ("true"/"false", default = "false")
 
 Audio Decoder - Finds a message hidden in an audio file.
 make audio_decode:

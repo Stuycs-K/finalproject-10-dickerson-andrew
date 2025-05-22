@@ -21,10 +21,19 @@ void setup() {
   encodedImage = loadImage(inputImage);
   messageBits = imageToBitArray(encodedImage);
 
+  try {
+    byte[] wavData = loadWav(inputAudio);
+    byte[] encodedWav = embedBitsInWav(wavData, messageBits);
+    saveWav(encodedWav, outputAudio);
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+
   exit();
 }
 
 void parseArgs() {
+  //println("PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
     if (args[i].equals("-iP")) inputImage = args[++i];
     if (args[i].equals("-iA")) inputAudio = args[++i];
@@ -33,6 +42,7 @@ void parseArgs() {
 }
 
 int[] imageToBitArray(PImage img) {
+  //println("CONVERTING IMG TO BITS");
   img.loadPixels();
   ArrayList<Integer> bits = new ArrayList<Integer>();
   for (color c : img.pixels) {
@@ -54,6 +64,7 @@ int[] result = new int[bits.size()];
 }
 
 byte[] loadWav(String filename) throws IOException {
+  //println("LOADING WAV");
   File file = new File(sketchPath(filename));
   byte[] data = new byte[(int) file.length()];
   FileInputStream fis = new FileInputStream(file);
@@ -63,6 +74,7 @@ byte[] loadWav(String filename) throws IOException {
 }
 
 byte[] embedBitsInWav(byte[] wavData, int[] bits) {
+  //println("EMBEDDING BITS");
   int headerSize = 44;
   int bitIndex = 0;
 
@@ -71,11 +83,11 @@ byte[] embedBitsInWav(byte[] wavData, int[] bits) {
     bitIndex++;
   }
 
-  println("Embedded " + bitIndex + " bits into audio.");
   return wavData;
 }
 
 void saveWav(byte[] data, String filename) throws IOException {
+  //println("SAVING WAV");
   FileOutputStream fos = new FileOutputStream(sketchPath(filename));
   fos.write(data);
   fos.close();
