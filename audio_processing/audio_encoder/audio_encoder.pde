@@ -5,6 +5,7 @@ PImage encodedImage;
 String inputImage = "encoded.png";
 String inputAudio = "base.wav";
 String outputAudio = "output.wav";
+String displayImage = "false";
 int[] messageBits;
 
 void setup() {
@@ -12,7 +13,7 @@ void setup() {
  
   if (args == null || args.length == 0) {
     println("Invalid or missing arguments.");
-    println("Usage: -iP <inputImage> -iA <inputAudio> -o <outputAudio>");
+    println("Usage: -iP <inputImage> -iA <inputAudio> -o <outputAudio>  -d <displayImage?>");
     exit();
   }
 
@@ -38,6 +39,7 @@ void parseArgs() {
     if (args[i].equals("-iP")) inputImage = args[++i];
     if (args[i].equals("-iA")) inputAudio = args[++i];
     if (args[i].equals("-o")) outputAudio = args[++i];
+    if (args[i].equals("-d")) displayImage = args[++i];
   }
 }
 
@@ -67,9 +69,9 @@ byte[] loadWav(String filename) throws IOException {
   //println("LOADING WAV");
   File file = new File(sketchPath(filename));
   byte[] data = new byte[(int) file.length()];
-  FileInputStream fis = new FileInputStream(file);
-  fis.read(data);
-  fis.close();
+  FileInputStream f = new FileInputStream(file);
+  f.read(data);
+  f.close();
   return data;
 }
 
@@ -91,4 +93,9 @@ void saveWav(byte[] data, String filename) throws IOException {
   FileOutputStream fos = new FileOutputStream(sketchPath(filename));
   fos.write(data);
   fos.close();
+  
+  if (displayImage.toLowerCase().equals("true")) {
+    //OPEN THE WAVE IN AUDACITY
+  }
+ 
 }
