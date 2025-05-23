@@ -33,11 +33,13 @@ This document must be updated daily every time you finish a work session.
 - Minor tweaks to DEVLOG format.
 - Change file organization within `audio_processing` sketch.
 
-
 ### 2025-05-22 - Saved an audio file with `audio_encoder`.
 - Library seems to work fine on lab machine, not sure what the issue is on personal device.
 - Fixed save destination for example command for `audio_encoder`.
 - Successfully saved file after encoding audio, unable to test without decoder though. 
 - Removed PROPOSAL.md as directed on piazza.
 
-
+### 2025-05-23 - Framework for `audio_decoder`.
+- Repurposed basic methods and intializations from `audio_encoder` into `audio_decoder`.
+- Added potential display flags for both audio sketches.
+- Updated example make commands to include new audio display flags.
