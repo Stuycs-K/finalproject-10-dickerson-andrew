@@ -63,8 +63,7 @@ make audio_encode:
 Audio Decoder - Finds a message hidden in an audio file.
 make audio_decode:
 - -i : input audio path (default = "obv.wav")
-- -oP : output image path (default = "encoded.png")
-- -o : output audio path (default = "encoded.wav")
+- -o : output image path (default = "encoded.png")
 - -d : display image after encoding ("true"/"false", default = "false")
 
 For Example Make Commands, see `examples/ex_make_commands`
