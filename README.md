@@ -7,9 +7,9 @@ Andrew Dickerson
        
 ### Project Description:
 
-This project is an extension of the `image_processing` lab. The processing program, `audio_encode` takes message as an input, encodes that the message into an image using the modified `image_encoder.pde`, then converts this image to a wav file, and overlays it with an existing mp3 file to successfully hide the message.
+This project is an extension of the `image_processing` lab. The processing program, `audio_encode` takes message as an input, encodes that the message into an image using the modified `image_encoder.pde`, then converts this image to a wav file, and overlays it with an existing wav file to successfully hide the message.
 
-The decoder works essentially by doing everything in reverse. It takes the altered portions of the mp3 file, and recreates the encoded image. It then translates the binary-encoded message from this image into readable ASCII characters that it will return.
+The decoder works essentially by doing everything in reverse. It takes the altered portions of the wav file, and recreates the encoded image. It then translates the binary-encoded message from this image into readable ASCII characters that it will return.
   
 ### Instructions:
 
