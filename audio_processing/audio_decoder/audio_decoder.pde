@@ -52,8 +52,12 @@ byte[] loadWav(String filename) throws IOException {
 int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   println("EXTRACTING BITS");
   int headerSize = 44;
-  int bitIndex = 0;
   int[] bits = new int[bitCount];
+  int bitIndex = 0;
+
+  for (int i = headerSize; i < wavData.length && bitIndex < bitCount; i++) {
+    bits[bitIndex++] = wavData[i] & 0x01;
+  }
 
   return bits;
 }
