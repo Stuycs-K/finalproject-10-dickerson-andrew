@@ -43,3 +43,6 @@ This document must be updated daily every time you finish a work session.
 - Repurposed basic methods and intializations from `audio_encoder` into `audio_decoder`.
 - Added potential display flags for both audio sketches.
 - Updated example make commands to include new audio display flags.
+
+### 2025-05-23 - Framework for `audio_decoder`.
+- Wrote methods for extractBitsFromWav and bitArrayToImage in `audio_decoder`.
