@@ -44,5 +44,10 @@ This document must be updated daily every time you finish a work session.
 - Added potential display flags for both audio sketches.
 - Updated example make commands to include new audio display flags.
 
-### 2025-05-23 - Framework for `audio_decoder`.
+### 2025-05-24 - Wrote more methods for `audio_decoder`.
 - Wrote methods for extractBitsFromWav and bitArrayToImage in `audio_decoder`.
+
+### 2025-05-25 - Completed all methods for `audio_decoder`, unable to test yet as described below.
+- Replaced preliminary code for bits to img method.
+- Added run sequence to setup in audio decoder.
+- Can't test on local since wsl can't detect the library.
