@@ -18,15 +18,16 @@ void setup() {
   }
 
   parseArgs();
-/*
+
   try {
     byte[] wavData = loadWav(inputAudio);
-    byte[] encodedWav = embedBitsInWav(wavData, messageBits);
-    saveWav(encodedWav, outputAudio);
+    int[] extractedBits = extractBitsFromWav(wavData, imageWidth * imageHeight * 6);
+    decodedImage = bitArrayToImage(extractedBits, imageWidth, imageHeight);
+    decodedImage.save(outputImage);
   } catch (Exception e) {
     e.printStackTrace();
   }
-*/
+
   exit();
 }
 
@@ -68,11 +69,14 @@ PImage bitArrayToImage(int[] bits, int width, int height) {
   img.loadPixels();
 
   for (int i = 0; i < img.pixels.length; i++) {
-    int r = (bits[i]);
-    int g = (bits[i]);
-    int b = (bits[i]);
+    int bitIdx = i * 6;
+    if (bitIdx + 5 >= bits.length) break;
+    
+    int r = (bits[bitIdx] | (bits[bitIdx + 1] << 1));
+    int g = (bits[bitIdx + 2] | (bits[bitIdx + 3] << 1));
+    int b = (bits[bitIdx + 4] | (bits[bitIdx + 5] << 1));
 
-    img.pixels[i] = color(r, g, b);
+    img.pixels[i] = color(r << 6, g << 6, b << 6);
   }
 
   img.updatePixels();
