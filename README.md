@@ -35,7 +35,7 @@ For more information on the flags and usage of the program, a comprehensive guid
 
 Note that the "Full Encoder/Decoder" represents the project as a whole, the "Audio Encoder/Decoder" is comprised of parts new for this project, and the "Image Encoder/Decoder" is based largely of its respective lab, with some changes for compatability and ease of use within the "Full Encoder/Decoder".
 
-Full Encoder - Hides message from plaintext or file in an image and then hides that image in an audio file.
+**Full Encoder** - Hides message from plaintext or file in an image and then hides that image in an audio file.
 make encode:
 - -iP : input image path (default = none, a blank, black image will be generated for use instead)
 - -oP : output image path (default = "encoded.png")
@@ -46,7 +46,7 @@ make encode:
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -d : display image after encoding ("true"/"false", default = "false")
 
-Full Decoder - Finds an image hidden in an audio file, and then the message hidden in that image.
+**Full Decoder** - Finds an image hidden in an audio file, and then the message hidden in that image.
 make decode:
 - -i : input audio path (default = "obv.wav")
 - -oP : output image path (default = "encoded.png")
@@ -55,7 +55,7 @@ make decode:
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 - -d : display image after encoding ("true"/"false", default = "false")
 
-Image Encoder - Hides message from plaintext or file in an image.
+**Image Encoder** - Hides message from plaintext or file in an image.
 make image_encode:
 - -i : input image path (default = none, a blank, black image will be generated for use instead)
 - -o : output image path (default = "encoded.png")
@@ -63,7 +63,7 @@ make image_encode:
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -d : display image after encoding ("true"/"false", default = "false")
 
-Image Decoder - Finds a message hidden in an image.
+**Image Decoder** - Finds a message hidden in an image.
 make image_decode:
 - -i : input image path (default = none, a blank, black image will be generated for use instead)
 - -o : output decoded path (default = "encoded.png")
@@ -72,14 +72,14 @@ make image_decode:
 - -d : display image after encoding ("true"/"false", default = "false")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
-Audio Encoder - Hides message from plaintext or file in an audio file.
+**Audio Encoder** - Hides message from plaintext or file in an audio file.
 make audio_encode:
 - -iP : input image path (default = "encoded.png")
 - -iA : input image path (default = "oxp.wav")
 - -o : output audio path (default = "encoded.wav")
 - -d : display wave after encoding ("true"/"false", default = "false")
 
-Audio Decoder - Finds a message hidden in an audio file.
+**Audio Decoder** - Finds a message hidden in an audio file.
 make audio_decode:
 - -i : input audio path (default = "obv.wav")
 - -o : output image path (default = "encoded.png")
