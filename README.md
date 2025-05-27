@@ -1,20 +1,30 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/am3xLbu5)
 # Image to Audio Encryption
  
-### GROUP NAME HERE (CHANGE THIS!!!!!)
+### The *Other* Audio Encryption Project
 
 Andrew Dickerson
-       
+
 ### Project Description:
 
 This project is an extension of the `image_processing` lab. The processing program, `audio_encode` takes message as an input, encodes that the message into an image using the modified `image_encoder.pde`, then converts this image to a wav file, and overlays it with an existing wav file to successfully hide the message.
 
 The decoder works essentially by doing everything in reverse. It takes the altered portions of the wav file, and recreates the encoded image. It then translates the binary-encoded message from this image into readable ASCII characters that it will return.
-  
+
 ### Instructions:
 
-How does the user install/compile/run the program. (CHANGE THIS!!!!!)
-How does the user interact with this program? (CHANGE THIS!!!!!)
+**How does the user install/compile/run the program?**
+The user runs the program by executing a make command for the respective program they are attempting to run.
+Example make commands have been provided in `examples/ex_make_commands.txt`.
+These example commands use example files that are also located in the `examples` directory.
+To use any other files outside this directory as arguments for the make command, the path of this file must be specified either explicitly, or relative to the location of the `.pde` file of the sketch (hence the `../../examples/example.file` in the make command examples).
+
+**How does the user interact with this program?**
+The user may interact with the program by altering the flags within the make command.
+For instance, the user can determine whether or not the output of the program should be displayed to them after the program runs with the `-d` flag.
+The user may also determine the mode of encoding for the image using the `-m` flag.
+For more information on the flags and usage of the program, a comprehensive guide to the purpose, name, and flags usage for each program has been provided below.
+Note that the "Full Encoder/Decoder" represents the project as a whole, the "Audio Encoder/Decoder" is comprised of parts new for this project, and the "Image Encoder/Decoder" is based largely of its respective lab, with some changes for compatability and ease of use within the "Full Encoder/Decoder".
 
 Full Encoder - Hides message from plaintext or file in an image and then hides that image in an audio file.
 make encode:
