@@ -51,3 +51,14 @@ This document must be updated daily every time you finish a work session.
 - Replaced preliminary code for bits to img method.
 - Added run sequence to setup in audio decoder.
 - Can't test on local since wsl can't detect the library.
+
+### 2025-05-26 - Created symbolic link and uncovered issues with `audio_decoder`.
+- Created symbolic link for allow for proper testing on local device for audio programs.
+- Fixed path in example make file audio input for `audio_decoder`.
+- Fixed flag name for audio input in `audio_decoder`.
+- Discovered issue with saving text file using .save() in `audio_decoder`.
+
+### 2025-05-27 - 
+- 
+- 
+- 
