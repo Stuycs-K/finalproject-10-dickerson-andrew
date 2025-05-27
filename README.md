@@ -50,10 +50,12 @@ make encode:
 make decode:
 - -i : input audio path (default = "obv.wav")
 - -oP : output image path (default = "encoded.png")
-- -o : output decoded path (default = "encoded.wav")
+- -o : output decoded path (default = "decoded.txt")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 - -d : display image after encoding ("true"/"false", default = "false")
+- -w : output image width (default = 100)
+- -h : display image height (default = 100)
 
 **Image Encoder** - Hides message from plaintext or file in an image.
 make image_encode:
@@ -84,6 +86,8 @@ make audio_decode:
 - -i : input audio path (default = "obv.wav")
 - -o : output image path (default = "encoded.png")
 - -d : display image after encoding ("true"/"false", default = "false")
+- -w : output image width (default = 100)
+- -h : display image height (default = 100)
 
 For Example Make Commands, see `examples/ex_make_commands`
 

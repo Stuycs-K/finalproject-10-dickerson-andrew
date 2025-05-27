@@ -9,9 +9,10 @@ make image_encode ARGS="-i examples/cat.png -o ../../examples/encoded_cat.png -p
 
 Only Image Decoder:
 make image_decode ARGS="-i encoded_cat.png -o message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i ../../examples/ex_image_decoded.png -o ../../examples/message.txt -m GREEDY -d TRUE"
 
 Only Audio Encoder:
 make audio_encode ARGS="-iP examples/encoded_cat.png -iA ../../examples/oxp.wav -o ../../examples/ex_audio_encoded.wav -d TRUE"
 
 Only Audio Decoder:
-make audio_decode ARGS="-i ../../examples/ex_audio_encoded.wav -o ../../examples/decoded.txt -d TRUE"
+make audio_decode ARGS="-i ../../examples/ex_audio_encoded.wav -o ../../examples/ex_image_decoded.png -d TRUE -w 877 -h 946"

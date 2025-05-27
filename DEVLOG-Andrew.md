@@ -59,6 +59,7 @@ This document must be updated daily every time you finish a work session.
 - Discovered issue with saving text file using .save() in `audio_decoder`.
 
 ### 2025-05-27 - 
-- 
-- 
-- 
+- Updated user instructions for running and interaction with program.
+- Added group name.
+- Changed format of `README` for readability.
+- Found bugs with `audio_encoder`.

@@ -38,6 +38,8 @@ void parseArgs() {
     println("INPUT AUDIO PATH: "+inputAudio);
     if (args[i].equals("-o")) outputImage = args[++i];
     if (args[i].equals("-d")) displayImage = args[++i];
+    if (args[i].equals("-w")) imageWidth = int(args[++i]);
+    if (args[i].equals("-h")) imageHeight = int(args[++i]);
   }
 }
 
