@@ -14,4 +14,4 @@ Only Audio Encoder:
 make audio_encode ARGS="-iP examples/encoded_cat.png -iA ../../examples/oxp.wav -o ../../examples/ex_audio_encoded.wav -d TRUE"
 
 Only Audio Decoder:
-make audio_decode ARGS="-i examples/ex_audio_encoded.wav -o ../../examples/decoded.txt -d TRUE"
+make audio_decode ARGS="-i ../../examples/ex_audio_encoded.wav -o ../../examples/decoded.txt -d TRUE"

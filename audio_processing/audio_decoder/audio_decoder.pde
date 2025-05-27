@@ -1,5 +1,5 @@
-import java.io.*;
 import processing.sound.*;
+import java.io.*;
 
 PImage decodedImage;
 String outputImage = "decoded.png";
@@ -34,7 +34,8 @@ void setup() {
 void parseArgs() {
   println("PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
-    if (args[i].equals("-iA")) inputAudio = args[++i];
+    if (args[i].equals("-i")) inputAudio = args[++i];
+    println("INPUT AUDIO PATH: "+inputAudio);
     if (args[i].equals("-o")) outputImage = args[++i];
     if (args[i].equals("-d")) displayImage = args[++i];
   }
