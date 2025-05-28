@@ -17,7 +17,10 @@ void setup() {
     exit();
   }
 
-  parseArgs();
+  if(!parseArgs()){
+    println("Parsing argument error;");
+    return;
+  }
 
   encodedImage = loadImage(inputImage);
   messageBits = imageToBitArray(encodedImage);
@@ -33,14 +36,44 @@ void setup() {
   exit();
 }
 
-void parseArgs() {
+boolean parseArgs() {
   //println("PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
-    if (args[i].equals("-iP")) inputImage = args[++i];
-    if (args[i].equals("-iA")) inputAudio = args[++i];
-    if (args[i].equals("-o")) outputAudio = args[++i];
-    if (args[i].equals("-d")) displayImage = args[++i];
+    if (args[i].equals("-iP")) {
+      try { 
+        inputImage = args[++i]; 
+      } catch(Exception e) {
+        println("-iP requires image file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-iA")) {
+      try { 
+      inputAudio = args[++i];
+      } catch(Exception e) {
+        println("-iA requires .wav file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-o")) {
+      try { 
+      outputAudio = args[++i];
+      } catch(Exception e) {
+        println("-o requires .wav file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-d")) {
+      try { 
+      displayImage = args[++i];
+      } catch(Exception e) {
+        println("-d requires boolean (True/False) as next argument");
+        return false;
+      }
+    }
+    
   }
+  return true;
 }
 
 int[] imageToBitArray(PImage img) {

@@ -17,7 +17,10 @@ void setup() {
     exit();
   }
 
-  parseArgs();
+  if(!parseArgs()){
+    println("Parsing argument error;");
+    return;
+  }
 
   try {
     byte[] wavData = loadWav(inputAudio);
@@ -31,20 +34,55 @@ void setup() {
   exit();
 }
 
-void parseArgs() {
-  println("PARSING ARGS");
+boolean parseArgs() {
+  //println("debug: PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
-    if (args[i].equals("-i")) inputAudio = args[++i];
-    println("INPUT AUDIO PATH: "+inputAudio);
-    if (args[i].equals("-o")) outputImage = args[++i];
-    if (args[i].equals("-d")) displayImage = args[++i];
-    if (args[i].equals("-w")) imageWidth = int(args[++i]);
-    if (args[i].equals("-h")) imageHeight = int(args[++i]);
+    if (args[i].equals("-i")) {
+      try { 
+        inputAudio = args[++i]; 
+      } catch(Exception e) {
+        println("-i requires .wav file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-o")) {
+      try { 
+      outputImage = args[++i];
+      } catch(Exception e) {
+        println("-o requires image file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-d")) {
+      try { 
+      displayImage = args[++i];
+      } catch(Exception e) {
+        println("-d requires boolean (True/False) as next argument");
+        return false;
+      }
+    }
+    if (args[i].equals("-w")) {
+      try { 
+      imageWidth = int(args[++i]);
+      } catch(Exception e) {
+        println("-w requires integer as next argument");
+        return false;
+      }
+    }
+    if (args[i].equals("-h")) {
+      try { 
+      imageHeight = int(args[++i]);
+      } catch(Exception e) {
+        println("-h requires integer as next argument");
+        return false;
+      }
+    }
   }
+  return true;
 }
 
 byte[] loadWav(String filename) throws IOException {
-  println("LOADING WAV");
+  //println("debug: LOADING WAV");
   File file = new File(sketchPath(filename));
   byte[] data = new byte[(int) file.length()];
   FileInputStream f = new FileInputStream(file);
@@ -54,7 +92,7 @@ byte[] loadWav(String filename) throws IOException {
 }
 
 int[] extractBitsFromWav(byte[] wavData, int bitCount) {
-  println("EXTRACTING BITS");
+  //println("debug: EXTRACTING BITS");
   int headerSize = 44;
   int[] bits = new int[bitCount];
   int bitIndex = 0;
@@ -67,7 +105,7 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
 }
 
 PImage bitArrayToImage(int[] bits, int width, int height) {
-  println("WRITING BITS TO IMG");
+  //println("debug: WRITING BITS TO IMG");
   PImage img = createImage(width, height, RGB);
   img.loadPixels();
 

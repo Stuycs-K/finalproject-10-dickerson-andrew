@@ -33,14 +33,14 @@ String loadTextFromFile(String filepath) {
     }
     reader.close();
   } catch (FileNotFoundException e) {
-    println("ERROR: Couldn't open file " + filepath);
+    println("Couldn't open file " + filepath);
     e.printStackTrace();
   }
   return content.toString().trim();
 }
 
 void setup() {
-  println("Working directory: " + new File(".").getAbsolutePath());
+  //println("debug: Working directory: " + new File(".").getAbsolutePath());
   if (args == null || !parseArgs()) {
     println("Invalid or missing arguments.");
     println("Usage: -i input.png -o output.png -p 'message_here' -d true -m MODE");
@@ -88,36 +88,65 @@ void settings() {
 
 boolean parseArgs() {
   for (int i = 0; i < args.length; i++) {
-    if (args[i].equals("-i") && i + 1 < args.length) {
-      INPUTFILENAME = args[++i];
-    } else if (args[i].equals("-o") && i + 1 < args.length) {
-      OUTPUTFILENAME = args[++i];
-    } else if (args[i].equals("-p") && i + 1 < args.length) {
-      String potentialPath = args[++i];
-      File f = new File(potentialPath);
-      if (f.exists() && f.isFile()) {
-        println("debug: Using file path for input.");
-        PLAINTEXT = loadTextFromFile(potentialPath);
-      } else {
-        if (potentialPath.contains(".txt") || potentialPath.contains("/")) {
-          println("WARNING: File not found.");
-        }
-        println("debug: Using string literal for input.");
-        PLAINTEXT = potentialPath;
+    if (args[i].equals("-i")) {
+      try { 
+        INPUTFILENAME = args[++i]; 
+      } catch(Exception e) {
+        println("-i requires image file path as next argument.");
+        return false;
       }
-    } else if (args[i].equals("-d") && i + 1 < args.length) {
+    }
+    if (args[i].equals("-o")) {
+      try { 
+      OUTPUTFILENAME = args[++i];
+      } catch(Exception e) {
+        println("-o requires .wav file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-p")) {
+      try {
+        String potentialPath = args[++i];
+        File f = new File(potentialPath);
+        if (f.exists() && f.isFile()) {
+          //println("debug: Using file path for input.");
+          PLAINTEXT = loadTextFromFile(potentialPath);
+        } else {
+          if (potentialPath.contains(".txt") || potentialPath.contains("/")) {
+            println("File not found.");
+          }
+          //println("debug: Using string literal for input.");
+          PLAINTEXT = potentialPath;
+        }
+      } catch(Exception e) {
+        println("-p requires plain text or text file path as next argument.");
+        return false;
+      }
+    }
+    if (args[i].equals("-d")) {
+      try { 
       DISPLAYMODE = args[++i];
-    } else if (args[i].equals("-m") && i + 1 < args.length) {
+      } catch(Exception e) {
+        println("-d requires boolean (True/False) as next argument");
+        return false;
+      }
+    }
+    if (args[i].equals("-m")) {
+      try { 
       String mode = args[++i].toLowerCase();
-      if (mode.equals("greedy")) {
-        MODE = GREEDY;
-      } else if (mode.equals("selective")) {
-         MODE = SELECTIVE;
-      } else if (mode.equals("file")) {
-        MODE = FILE;
-      } else {
-        println("WARNING: Invalid mode, defaulting to GREEDY.");
-        MODE = GREEDY;
+        if (mode.equals("greedy")) {
+          MODE = GREEDY;
+        } else if (mode.equals("selective")) {
+           MODE = SELECTIVE;
+        } else if (mode.equals("file")) {
+          MODE = FILE;
+        } else {
+          println("Invalid mode, defaulting to GREEDY.");
+          MODE = GREEDY;
+        }
+      } catch(Exception e) {
+        println("-m requires mode (greedy/selective/file) as next argument.");
+        return false;
       }
     }
   }
@@ -154,7 +183,7 @@ void modifyImage(PImage img, int[]messageArray) {
     for (int i = 0; i < 4; i++) {
       int index = start + i;
       if (index >= img.pixels.length) {
-        println("WARNING: Not enough space in provided image to add termination sequence.");
+        println("Not enough space in provided image to add termination sequence.");
         break;
       }
       img.pixels[index] = color(3, 3, 3);
@@ -244,7 +273,7 @@ int []fileToArray(String filename) {
     }
     reader.close();
   } catch (FileNotFoundException e) {
-      System.out.println("WARNING: An error occurred.");
+      System.out.println("An error occurred.");
       e.printStackTrace();
     }
   return messageToArray(content);
