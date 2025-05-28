@@ -9,6 +9,7 @@ final static int FILE = 2;
 int MODE = GREEDY;
 String INPUTFILENAME="input.png";
 String OUTPUTFILENAME="outputfile";
+Boolean hasOutputFile = false;
 
 /*NEW*/
 int BYTE_COUNT = -1;//the number of characters or bytes in the message. (used in SELECTIVE/FILE modes)
@@ -30,10 +31,14 @@ ArrayList<Integer> getParts(PImage img){
       encodedByte += lastPairRed;
       
       if ((i + 1) % 4 == 0) {
-        parts.add(Integer.parseInt(encodedByte, 2));
-        encodedByte = "";
+        if (Integer.parseInt(encodedByte, 2) == 255) {
+          encodedByte = "";
+          break;
+        } else{ 
+          parts.add(Integer.parseInt(encodedByte, 2));
+          encodedByte = "";
+        }
       }
-    
     }
     return parts;
   }else if(MODE == SELECTIVE || MODE == FILE){
@@ -114,14 +119,21 @@ void setup()
   ArrayList<Integer> parts =  getParts(img);
 
   //decode it or save it to a file
-  if(MODE == GREEDY || MODE == SELECTIVE){
-    println( decode(parts) );
-  }else if(MODE == FILE) {
-    byte[]nums = getBytes(parts);
-    println("Saving file: "+OUTPUTFILENAME);
-    //built in processing function:
+  if (hasOutputFile) {
+  println("SAVING OUTPUT: " + OUTPUTFILENAME);
+  
+  if (MODE == FILE) {
+    byte[] nums = getBytes(parts);
     saveBytes(OUTPUTFILENAME, nums);
+  } else {
+    String decodedMessage = decode(parts);
+    String[] lines = {decodedMessage};
+    saveStrings(OUTPUTFILENAME, lines);
   }
+
+} else {
+  println(decode(parts));
+}
 }
 
 void draw(){
@@ -143,8 +155,12 @@ boolean parseArgs(){
       }
 
       if(args[i].equals("-o")){
+        hasOutputFile = true;
         if(args[i+1]!=null){
           OUTPUTFILENAME=args[i+1];
+          if (MODE == FILE && OUTPUTFILENAME.endsWith(".txt")) {
+            println("WARNING: Saving binary data to a .txt file may not be readable.");
+          }
         }else{
           println("-o requires filename as next argument");
           return false;
@@ -184,7 +200,3 @@ boolean parseArgs(){
   }
   return true;
 }
-
-
-// make decode ARGS="-i encoded.png -m GREEDY -d TRUE"
-// make decode ARGS="-i encoded.png -m SELECTIVE -d TRUE"

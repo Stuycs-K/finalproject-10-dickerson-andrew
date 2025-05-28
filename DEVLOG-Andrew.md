@@ -62,4 +62,8 @@ This document must be updated daily every time you finish a work session.
 - Updated user instructions for running and interaction with program.
 - Added group name.
 - Changed format of `README` for readability.
-- Found bugs with `audio_encoder`.
+- Fixed issue where provided `oxp.wav` file was too small to contain encoded image.
+- Fixed issue where `image_encoder` wouldn't correctly interpret image paths using `-p` flag.
+- Fixed issue where `image_decoder` wouldn't stop properly after receiving termination sequence.
+- Added warning statements to `image_encoder` and `image_decoder`.
+

@@ -23,7 +23,24 @@ void draw(){
   }
 }
 
+String loadTextFromFile(String filepath) {
+  StringBuilder content = new StringBuilder();
+  try {
+    File file = new File(filepath);
+    Scanner reader = new Scanner(file);
+    while (reader.hasNextLine()) {
+      content.append(reader.nextLine()).append("\n");
+    }
+    reader.close();
+  } catch (FileNotFoundException e) {
+    println("ERROR: Couldn't open file " + filepath);
+    e.printStackTrace();
+  }
+  return content.toString().trim();
+}
+
 void setup() {
+  println("Working directory: " + new File(".").getAbsolutePath());
   if (args == null || !parseArgs()) {
     println("Invalid or missing arguments.");
     println("Usage: -i input.png -o output.png -p 'message_here' -d true -m MODE");
@@ -43,7 +60,7 @@ void setup() {
     img = loadImage(INPUTFILENAME);
   }
 
-  int[] parts = (MODE == FILE) ? fileToArray(PLAINTEXT) : messageToArray(PLAINTEXT);
+  int[] parts = messageToArray(PLAINTEXT);
   modifyImage(img, parts);
   img.save(OUTPUTFILENAME);
 
@@ -76,7 +93,18 @@ boolean parseArgs() {
     } else if (args[i].equals("-o") && i + 1 < args.length) {
       OUTPUTFILENAME = args[++i];
     } else if (args[i].equals("-p") && i + 1 < args.length) {
-      PLAINTEXT = args[++i];
+      String potentialPath = args[++i];
+      File f = new File(potentialPath);
+      if (f.exists() && f.isFile()) {
+        println("debug: Using file path for input.");
+        PLAINTEXT = loadTextFromFile(potentialPath);
+      } else {
+        if (potentialPath.contains(".txt") || potentialPath.contains("/")) {
+          println("WARNING: File not found.");
+        }
+        println("debug: Using string literal for input.");
+        PLAINTEXT = potentialPath;
+      }
     } else if (args[i].equals("-d") && i + 1 < args.length) {
       DISPLAYMODE = args[++i];
     } else if (args[i].equals("-m") && i + 1 < args.length) {
@@ -88,7 +116,7 @@ boolean parseArgs() {
       } else if (mode.equals("file")) {
         MODE = FILE;
       } else {
-        println("Invalid mode, defaulting to GREEDY.");
+        println("WARNING: Invalid mode, defaulting to GREEDY.");
         MODE = GREEDY;
       }
     }
@@ -122,11 +150,14 @@ void modifyImage(PImage img, int[]messageArray) {
       img.pixels[i] = color(encodedRed, g, b);
     }
 
-    if (messageArray.length % 4 != 0) {
-      int numRemainingPixels = 4 - (messageArray.length % 4);
-      for (int i = messageArray.length; i < messageArray.length + numRemainingPixels; i++) {
-        img.pixels[i] = color(3, 3, 3);
+    int start = messageArray.length;
+    for (int i = 0; i < 4; i++) {
+      int index = start + i;
+      if (index >= img.pixels.length) {
+        println("WARNING: Not enough space in provided image to add termination sequence.");
+        break;
       }
+      img.pixels[index] = color(3, 3, 3);
     }
   } else if (MODE == SELECTIVE || MODE == FILE) {
     //SELECTIVE MODE: only use a few pixels based on some criteria
@@ -153,8 +184,8 @@ void modifyImage(PImage img, int[]messageArray) {
           int encodedBlue = b & 0xFC;
           int messageBit = messageArray[messageIndex]; 
           encodedBlue = encodedBlue | (messageBit & 0x03);
-          //println(String.format("%8s", Integer.toBinaryString(encodedBlue)).replace(" ", "0"));
-          //println(messageArray[messageIndex]);
+          //println(debug: String.format("%8s", Integer.toBinaryString(encodedBlue)).replace(" ", "0"));
+          //println(debug: messageArray[messageIndex]);
           img.pixels[i] = color(r, g, encodedBlue);
           messageIndex++;
         } else if (messageIndex >= messageArray.length) {
@@ -166,7 +197,7 @@ void modifyImage(PImage img, int[]messageArray) {
   }
 
   //write the pixel array back to the image.
-  //println("Usable Pixels: "+usable_pixels);
+  //println(debug: +"Usable Pixels: "+usable_pixels);
   img.updatePixels();
 }
 
@@ -199,7 +230,7 @@ int [] messageToArray(String s) {
    So your data array would look like this:
    { 1, 1, 1, 0, 1, 2, 2, 0, 1, 2, 2, 1, 1, 3, 0, 3...}
    */
-  //println(Arrays.toString(parts));
+  //println(debug: Arrays.toString(parts));
   return parts;
 }
 
@@ -213,7 +244,7 @@ int []fileToArray(String filename) {
     }
     reader.close();
   } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
+      System.out.println("WARNING: An error occurred.");
       e.printStackTrace();
     }
   return messageToArray(content);

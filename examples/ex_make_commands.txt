@@ -1,18 +1,19 @@
 Full Encoder (runs both image and audio on the same args):
-make encode ARGS="-iP examples/cat.png -oP examples/encoded_cat.png -iM image_processing/image_encoder/encoded_cat.png -iA oxp.wav -oA ex_full_output.wav -p examples/secret.txt -m GREEDY -d true"
+make encode ARGS="-iP examples/cat.png -oP examples/encoded_cat.png -iM image_processing/image_encoder/encoded_cat.png -iA washing_machine_heart.wav -oA ex_full_output.wav -p examples/secret.txt -m GREEDY -d true"
 
 Full Decoder (runs both image and audio on the same args):
 make encode ARGS="-i examples/encoded.wav -oP ex_full_hidden.png -o ../../examples/ex_full_decoded.txt -m GREEDY -d TRUE"
 
 Only Image Encoder:
-make image_encode ARGS="-i examples/cat.png -o ../../examples/encoded_cat.png -p examples/secret.txt -m GREEDY -d TRUE"
+make image_encode ARGS="-i examples/cat.png -o ../../examples/ex_image_encoded_cat.png -p examples/secret_message.txt -m GREEDY -d TRUE"
+make image_encode ARGS="-i examples/cat.png -o ../../examples/ex_image_encoded_cat.png -p LookAtThisCoolSecretMessage -m GREEDY -d TRUE"
 
 Only Image Decoder:
-make image_decode ARGS="-i encoded_cat.png -o message.txt -m GREEDY -d TRUE"
-make image_decode ARGS="-i ../../examples/ex_image_decoded.png -o ../../examples/message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i ../../examples/ex_image_encoded_cat.png -o ../../examples/image_decoder_decoded_message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i ../../examples/ex_image_decoded.png -o ../../examples/image_decoder_decoded_message.txt -m GREEDY -d TRUE"
 
 Only Audio Encoder:
-make audio_encode ARGS="-iP examples/encoded_cat.png -iA ../../examples/oxp.wav -o ../../examples/ex_audio_encoded.wav -d TRUE"
+make audio_encode ARGS="-iP examples/ex_image_encoded_cat.png -iA ../../examples/washing_machine_heart.wav -o ../../examples/ex_audio_encoded.wav -d TRUE"
 
 Only Audio Decoder:
 make audio_decode ARGS="-i ../../examples/ex_audio_encoded.wav -o ../../examples/ex_image_decoded.png -d TRUE -w 877 -h 946"
