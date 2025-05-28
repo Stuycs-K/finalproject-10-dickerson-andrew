@@ -66,4 +66,5 @@ This document must be updated daily every time you finish a work session.
 - Fixed issue where `image_encoder` wouldn't correctly interpret image paths using `-p` flag.
 - Fixed issue where `image_decoder` wouldn't stop properly after receiving termination sequence.
 - Added warning statements to `image_encoder` and `image_decoder`.
+- Changed example file names for easier comprehension of use in example make files.
 
