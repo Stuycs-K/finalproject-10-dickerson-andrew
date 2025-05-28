@@ -69,9 +69,7 @@ make image_encode:
 make image_decode:
 - -i : input image path (default = none, a blank, black image will be generated for use instead)
 - -o : output decoded path (default = "encoded.png")
-- -p : plaintext message or text file name (required; default = "secret.txt")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
-- -d : display image after encoding ("true"/"false", default = "false")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
 **Audio Encoder** - Hides message from plaintext or file in an audio file.
