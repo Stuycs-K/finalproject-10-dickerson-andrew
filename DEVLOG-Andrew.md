@@ -68,3 +68,9 @@ This document must be updated daily every time you finish a work session.
 - Added warning statements to `image_encoder` and `image_decoder`.
 - Changed example file names for easier comprehension of use in example make files.
 
+### 2025-05-28 - 
+- Updated user instructions for running and interaction with program.
+- Removed extra flags from `audio_encoder` in instructions.
+- 
+
+
