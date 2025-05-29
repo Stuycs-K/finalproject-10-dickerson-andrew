@@ -7,13 +7,17 @@ make encode ARGS="-i examples/encoded.wav -oP ex_full_hidden.png -o ../../exampl
 Only Image Encoder:
 make image_encode ARGS="-i examples/cat.png -o ../../examples/ex_image_encoded_cat.png -p examples/secret_message.txt -m GREEDY -d TRUE"
 make image_encode ARGS="-i examples/cat.png -o ../../examples/ex_image_encoded_cat.png -p LookAtThisCoolSecretMessage -m GREEDY -d TRUE"
+make image_encode ARGS="-o ../../examples/ex_encoded_blank.png -p examples/lorem_ipsum.txt -m SELECTIVE -d TRUE"
 
 Only Image Decoder:
-make image_decode ARGS="-i ../../examples/ex_image_encoded_cat.png -o ../../examples/image_decoder_decoded_message.txt -m GREEDY -d TRUE"
-make image_decode ARGS="-i ../../examples/ex_image_decoded.png -o ../../examples/image_decoder_decoded_message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i ../../examples/ex_image_encoded_cat.png -o ../../examples/image_decoder_decoded_secret_message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i ../../examples/ex_image_decoded.png -o ../../examples/image_decoder_decoded_secret_message.txt -m GREEDY -d TRUE"
+make image_decode ARGS="-i ../../examples/ex_encoded_blank.png -o ../../examples/image_decoder_decoded_lorem_ipsum.txt -m SELECTIVE -d TRUE"
 
 Only Audio Encoder:
-make audio_encode ARGS="-iP examples/ex_image_encoded_cat.png -iA ../../examples/washing_machine_heart.wav -o ../../examples/ex_audio_encoded.wav -d TRUE"
+make audio_encode ARGS="-iP examples/ex_image_encoded_cat.png -iA ../../examples/washing_machine_heart.wav -o ../../examples/ex_audio_encoded_secret_message.wav -d FALSE"
+make audio_encode ARGS="-iP examples/ex_encoded_blank.png -iA ../../examples/washing_machine_heart.wav -o ../../examples/ex_audio_encoded_lorem_ipsum.wav -d FALSE"
 
 Only Audio Decoder:
-make audio_decode ARGS="-i ../../examples/ex_audio_encoded.wav -o ../../examples/ex_image_decoded.png -d TRUE -w 877 -h 946"
+make audio_decode ARGS="-i ../../examples/ex_audio_encoded_secret_message.wav -o ../../examples/ex_audio_cat_decoded.png -d FALSE -w 877 -h 946"
+make audio_decode ARGS="-i ../../examples/ex_audio_encoded_lorem_ipsum.wav -o ../../examples/ex_audio_blank_decoded.png -d FALSE -w 877 -h 946"

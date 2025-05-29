@@ -11,7 +11,7 @@ final static int FILE = 2;
 int MODE = GREEDY;
 String PLAINTEXT = "This";
 String DISPLAYMODE = "false";
-String INPUTFILENAME="dark.png";
+String INPUTFILENAME="";
 String OUTPUTFILENAME="encoded.png";
 PImage img; 
 //the parseArgs function will set these to non-defaults
@@ -53,7 +53,7 @@ void setup() {
     img = createImage(1200, 600, RGB);
     img.loadPixels();
   for (int i = 0; i < img.pixels.length; i++) {
-    img.pixels[i] = color(0, 0, 0);
+    img.pixels[i] = color(255, 255, 255);
   }
     img.updatePixels();
   } else {

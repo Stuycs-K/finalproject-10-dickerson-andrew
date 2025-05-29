@@ -37,7 +37,7 @@ void setup() {
 }
 
 boolean parseArgs() {
-  //println("PARSING ARGS");
+  //println("debug: PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
     if (args[i].equals("-iP")) {
       try { 
@@ -77,7 +77,7 @@ boolean parseArgs() {
 }
 
 int[] imageToBitArray(PImage img) {
-  //println("CONVERTING IMG TO BITS");
+  //println("debug: CONVERTING IMG TO BITS");
   img.loadPixels();
   ArrayList<Integer> bits = new ArrayList<Integer>();
   for (color c : img.pixels) {
@@ -85,25 +85,32 @@ int[] imageToBitArray(PImage img) {
     int g = (int) green(c);
     int b = (int) blue(c);
   
-    for (int i = 0; i < 8; i++) bits.add((r >> i) & 0x01);
-    for (int i = 0; i < 8; i++) bits.add((g >> i) & 0x01);
-    for (int i = 0; i < 8; i++) bits.add((b >> i) & 0x01);
+    for (int i = 0; i < 8; i++) {
+      bits.add((r >> i) & 0x01);
+    }
+    for (int i = 0; i < 8; i++) {
+      bits.add((g >> i) & 0x01);
+    }
+    for (int i = 0; i < 8; i++) {
+      bits.add((b >> i) & 0x01);
+    }
   }
 
-  int[] bitArray = new int[bits.size() + 32];
+  int[] bitArray = new int[bits.size() + 24];
   int messageLength = bits.size();
-  for (int i = 0; i < 32; i++) {
-    bitArray[i] = (messageLength >> (31 - i)) & 1;
+  for (int i = 0; i < 24; i++) {
+    bitArray[i] = (messageLength >> (23 - i)) & 1;
   }
 
   for (int i = 0; i < bits.size(); i++) {
-    bitArray[i+32] = bits.get(i);
+    bitArray[i+24] = bits.get(i);
   }
+  
   return bitArray;
 }
 
 byte[] loadWav(String filename) throws IOException {
-  //println("LOADING WAV");
+  //println("debug: LOADING WAV");
   File file = new File(sketchPath(filename));
   byte[] data = new byte[(int) file.length()];
   FileInputStream f = new FileInputStream(file);
@@ -113,7 +120,7 @@ byte[] loadWav(String filename) throws IOException {
 }
 
 byte[] embedBitsInWav(byte[] wavData, int[] bits) {
-  //println("EMBEDDING BITS");
+  //println("debug: EMBEDDING BITS");
   int headerSize = 44;
   int bitIndex = 0;
   int step = 2;
@@ -127,7 +134,7 @@ byte[] embedBitsInWav(byte[] wavData, int[] bits) {
 }
 
 void saveWav(byte[] data, String filename) throws IOException {
-  //println("SAVING WAV");
+  //println("debug: SAVING WAV");
   FileOutputStream fos = new FileOutputStream(sketchPath(filename));
   fos.write(data);
   fos.close();

@@ -41,7 +41,7 @@ ArrayList<Integer> getParts(PImage img){
       }
     }
     return parts;
-  }else if(MODE == SELECTIVE || MODE == FILE){
+  } else if(MODE == SELECTIVE || MODE == FILE) {
     //you should use BYTE_COUNT so you know how many parts there are.
     //calculate parts here.
     if (BYTE_COUNT == -1) {
