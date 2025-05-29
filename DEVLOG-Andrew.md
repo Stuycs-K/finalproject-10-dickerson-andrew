@@ -71,6 +71,7 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-28 - 
 - Updated user instructions for running and interaction with program.
 - Removed extra flags from `audio_encoder` in instructions.
-- 
+- Changed `audio_encoder` and `audio_decoder` to try and retrieve full image with less instrusive encoding.
+- Successfully decoded a message using `audio_decoder` but the retrieved image is still off.
 
 

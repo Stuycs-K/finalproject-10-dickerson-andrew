@@ -81,21 +81,25 @@ int[] imageToBitArray(PImage img) {
   img.loadPixels();
   ArrayList<Integer> bits = new ArrayList<Integer>();
   for (color c : img.pixels) {
-  int r = (int) red(c);
-  int g = (int) green(c);
-  int b = (int) blue(c);
+    int r = (int) red(c);
+    int g = (int) green(c);
+    int b = (int) blue(c);
+  
+    for (int i = 0; i < 8; i++) bits.add((r >> i) & 0x01);
+    for (int i = 0; i < 8; i++) bits.add((g >> i) & 0x01);
+    for (int i = 0; i < 8; i++) bits.add((b >> i) & 0x01);
+  }
 
-  bits.add(r & 0x01);
-  bits.add((r >> 1) & 0x01);
-  bits.add(g & 0x01);
-  bits.add((g >> 1) & 0x01);
-  bits.add(b & 0x01);
-  bits.add((b >> 1) & 0x01);
-}
+  int[] bitArray = new int[bits.size() + 32];
+  int messageLength = bits.size();
+  for (int i = 0; i < 32; i++) {
+    bitArray[i] = (messageLength >> (31 - i)) & 1;
+  }
 
-int[] result = new int[bits.size()];
-  for (int i = 0; i < bits.size(); i++) result[i] = bits.get(i);
-  return result;
+  for (int i = 0; i < bits.size(); i++) {
+    bitArray[i+32] = bits.get(i);
+  }
+  return bitArray;
 }
 
 byte[] loadWav(String filename) throws IOException {
@@ -112,8 +116,9 @@ byte[] embedBitsInWav(byte[] wavData, int[] bits) {
   //println("EMBEDDING BITS");
   int headerSize = 44;
   int bitIndex = 0;
+  int step = 2;
 
-  for (int i = headerSize; i < wavData.length && bitIndex < bits.length; i++) {
+  for (int i = headerSize + 1; i < wavData.length && bitIndex < bits.length; i+= step) {
     wavData[i] = (byte) ((wavData[i] & 0xFE) | bits[bitIndex]);
     bitIndex++;
   }
