@@ -5,21 +5,21 @@ Full Decoder (runs both image and audio on the same args):
 1. make encode ARGS="-i examples/input/encoded.wav -oP full_hidden.png -o ../../examples/output/full_decoded.txt -m GREEDY -d TRUE"
 
 Only Image Encoder:
-1A. Short Secret into Cat:          make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p ../../examples/secret_short.txt -m GREEDY -d TRUE"
-1B. Plain Text into Cat:            make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p LookAtThisCoolSecretMessage -m GREEDY -d TRUE"
-2. Lorem into Blank, Selective:     make image_encode ARGS="-o ../../examples/output/image_encoded.png -p examples/input/lorem_ipsum.txt -m SELECTIVE -d TRUE"
+1A. Short Secret into Cat:          make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p ../../examples/secret_short.txt -m GREEDY -d FALSE"
+1B. Plain Text into Cat:            make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p LookAtThisCoolSecretMessage -m GREEDY -d FALSE"
+2. Lorem into Blank, Selective:     make image_encode ARGS="-o ../../examples/output/image_encoded.png -p examples/input/lorem_ipsum.txt -m SELECTIVE -d FALSE"
 
 Only Image Decoder:
-1A. Short Secret from Cat, Greedy:  make image_decode ARGS="-i ../../examples/input/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d TRUE"
-1B. Plain Text from Cat, Greedy:    make image_decode ARGS="-i ../../examples/input/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d TRUE"
-2. Lorem from Blank, Selective:     make image_decode ARGS="-i ../../examples/input/encoded_blank.png -o ../../examples/output/image_decoded.txt -m SELECTIVE -d TRUE"
+1A. Short Secret from Cat, Greedy:  make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d FALSE"
+1B. Plain Text from Cat, Greedy:    make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d FALSE"
+2. Lorem from Blank, Selective:     make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m SELECTIVE -d FALSE"
 
 Only Audio Encoder:
-1. Encoded Cat into Washing:        make audio_encode ARGS="-iP ../../examples/output/image_encoded_cat.png -iA ../../examples/input/washing_machine_heart.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
-2. Blank into Silent:               make audio_encode ARGS="-iP ../../examples/output/encoded_blank.png -iA ../../examples/input/5-min-silence.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
+1. Encoded Cat into Washing:        make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/washing_machine_heart.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
+2. Blank into Silent:               make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/5-min-silence.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
 
 Only Audio Decoder:
-1. Encoded cat and Washing:         make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 877 -h 946"
+1. Encoded Cat and Washing:         make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 877 -h 946"
 2. Blank into Silent:               make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 1200 -h 600"
 
 

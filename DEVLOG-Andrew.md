@@ -58,7 +58,7 @@ This document must be updated daily every time you finish a work session.
 - Fixed flag name for audio input in `audio_decoder`.
 - Discovered issue with saving text file using .save() in `audio_decoder`.
 
-### 2025-05-27 - 
+### 2025-05-27 - Instruction modification and error handling.
 - Updated user instructions for running and interaction with program.
 - Added group name.
 - Changed format of `README` for readability.
@@ -68,15 +68,16 @@ This document must be updated daily every time you finish a work session.
 - Added warning statements to `image_encoder` and `image_decoder`.
 - Changed example file names for easier comprehension of use in example make files.
 
-### 2025-05-28 - 
-- Updated user instructions for running and interaction with program.
+### 2025-05-28 - Reduced instrusivity of `audio_encoder`
 - Removed extra flags from `audio_encoder` in instructions.
 - Changed `audio_encoder` and `audio_decoder` to try and retrieve full image with less instrusive encoding.
 - Successfully decoded a message using `audio_decoder` but the retrieved image is still off.
 
-### 2025-05-29 - 
+### 2025-05-29 - Debugging `audio_encoder` and `audio_decoder`.
 - Fixed parity issues between `audio_encoder` and `audio_decoder`.
 - Successfully decoded part of original image using `audio_decoder`.
 - Began changing file and naming structure for `/examples`.
 
 ### 2025-05-30 - 
+- Changed example make command format and names to increase ease of use.
+- 
