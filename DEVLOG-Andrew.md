@@ -74,4 +74,9 @@ This document must be updated daily every time you finish a work session.
 - Changed `audio_encoder` and `audio_decoder` to try and retrieve full image with less instrusive encoding.
 - Successfully decoded a message using `audio_decoder` but the retrieved image is still off.
 
+### 2025-05-29 - 
+- Fixed parity issues between `audio_encoder` and `audio_decoder`.
+- Successfully decoded part of original image using `audio_decoder`.
+- Began changing file and naming structure for `/examples`.
 
+### 2025-05-30 - 

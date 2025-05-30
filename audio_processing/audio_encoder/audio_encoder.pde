@@ -18,7 +18,7 @@ void setup() {
   }
 
   if(!parseArgs()){
-    println("Parsing argument error;");
+    println("Parsing argument error.");
     return;
   }
 
@@ -125,7 +125,7 @@ byte[] embedBitsInWav(byte[] wavData, int[] bits) {
   int bitIndex = 0;
   int step = 2;
 
-  for (int i = headerSize + 1; i < wavData.length && bitIndex < bits.length; i+= step) {
+  for (int i = headerSize + 1; i < wavData.length && bitIndex < bits.length; i += step) {
     wavData[i] = (byte) ((wavData[i] & 0xFE) | bits[bitIndex]);
     bitIndex++;
   }

@@ -18,14 +18,23 @@ void setup() {
   }
 
   if(!parseArgs()){
-    println("Parsing argument error;");
+    println("Parsing argument error.");
     return;
   }
 
   try {
     byte[] wavData = loadWav(inputAudio);
-    int[] extractedBits = extractBitsFromWav(wavData, imageWidth * imageHeight * 24);
-    decodedImage = bitArrayToImage(extractedBits, imageWidth, imageHeight);
+    
+    int[] headerBits = extractBitsFromWav(wavData, 24);
+    int messageLength = 0;
+    for (int i = 0; i < 24; i++) {
+      messageLength = (messageLength << 1) | headerBits[i];
+    }
+    
+    int[] extractedBits = extractBitsFromWav(wavData, 24 + messageLength);
+    int[] imageBits = subset(extractedBits, 24);
+
+    decodedImage = bitArrayToImage(imageBits, imageWidth, imageHeight);
     decodedImage.save(outputImage);
   } catch (Exception e) {
     e.printStackTrace();
@@ -94,10 +103,18 @@ byte[] loadWav(String filename) throws IOException {
 int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   //println("debug: EXTRACTING BITS");
   int headerSize = 44;
+  
   int[] bits = new int[bitCount];
+  int maxBits = (wavData.length - 44) / 2; 
+  if (bits.length > maxBits) {
+    println("Not enough space in audio file to embed image, please use a larger audio file.");
+    exit();
+  }
+  
   int bitIndex = 0;
+  int step = 2;
 
-  for (int i = headerSize; i < wavData.length && bitIndex < bitCount; i++) {
+  for (int i = headerSize + 1; i < wavData.length && bitIndex < bitCount; i += step) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
 
@@ -110,18 +127,14 @@ PImage bitArrayToImage(int[] bits, int width, int height) {
   img.loadPixels();
 
   for (int i = 0; i < img.pixels.length; i++) {
-    int bitIdx = i * 6;
-    if (bitIdx + 5 >= bits.length) {
+    int bitIdx = i * 24;
+    if (bitIdx + 23 >= bits.length) {
       break;
     }
     int r = 0, g = 0, b = 0;
     for (int j = 0; j < 8; j++) {
       r |= (bits[bitIdx + j] << j);
-    }
-    for (int j = 0; j < 8; j++) {
       g |= (bits[bitIdx + 8 + j] << j);
-    }
-    for (int j = 0; j < 8; j++) {
       b |= (bits[bitIdx + 16 + j] << j);
     }
 
