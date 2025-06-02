@@ -78,6 +78,11 @@ This document must be updated daily every time you finish a work session.
 - Successfully decoded part of original image using `audio_decoder`.
 - Began changing file and naming structure for `/examples`.
 
-### 2025-05-30 - 
-- Changed example make command format and names to increase ease of use.
-- 
+### 2025-05-30 - Debugging and make command format.
+- Modified example make command format and names to increase ease of use.
+- Added additional cases and debug statements.
+
+### 2025-06-1 - Debugging and test cases.
+- Fixed issue with flag listing when receiving invalid arguments for `audio_decoder`.
+- Added more test cases with clearer input image.
+- Narrowed down issue to insufficient space in wav file for encoding full image with current encoding methods.
