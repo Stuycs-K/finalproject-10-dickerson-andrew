@@ -1,1 +1,1 @@
-LookAtThisCoolSecretMessage
+../../examples/input/secret_short.txt

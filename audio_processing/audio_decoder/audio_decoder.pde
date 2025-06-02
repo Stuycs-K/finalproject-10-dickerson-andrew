@@ -32,7 +32,7 @@ void setup() {
     }
 
     int bitCapacity = (wavData.length - 44);
-    println("Available bits: " + bitCapacity);
+    println("(DEBUG) Total bits in audio: " + bitCapacity);
     
     int[] extractedBits = extractBitsFromWav(wavData, 24 + messageLength);
     int[] imageBits = subset(extractedBits, 24);
@@ -47,7 +47,7 @@ void setup() {
 }
 
 boolean parseArgs() {
-  //println("debug: PARSING ARGS");
+  //println("(DEBUG) PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
     if (args[i].equals("-i")) {
       try { 
@@ -94,7 +94,7 @@ boolean parseArgs() {
 }
 
 byte[] loadWav(String filename) throws IOException {
-  //println("debug: LOADING WAV");
+  //println("(DEBUG) LOADING WAV");
   File file = new File(sketchPath(filename));
   byte[] data = new byte[(int) file.length()];
   FileInputStream f = new FileInputStream(file);
@@ -104,7 +104,7 @@ byte[] loadWav(String filename) throws IOException {
 }
 
 int[] extractBitsFromWav(byte[] wavData, int bitCount) {
-  //println("debug: EXTRACTING BITS");
+  //println("(DEBUG) EXTRACTING BITS");
   int headerSize = 44;
   
   int[] bits = new int[bitCount];
@@ -120,12 +120,13 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   for (int i = headerSize + 1; i < wavData.length && bitIndex < bitCount; i += step) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
-  println("debug: Num bits = " + bits.length + " should be " + width * height * 24);
+  println("(DEBUG) Bits in image = " + (bits.length - 24) + " should be " + imageWidth * imageHeight * 24);
+  println("(DEBUG) Max bits = " + maxBits);
   return bits;
 }
 
 PImage bitArrayToImage(int[] bits, int width, int height) {
-  //println("debug: WRITING BITS TO IMG");
+  //println("(DEBUG) WRITING BITS TO IMG");
   PImage img = createImage(width, height, RGB);
   img.loadPixels();
 
