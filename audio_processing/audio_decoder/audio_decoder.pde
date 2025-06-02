@@ -108,7 +108,7 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   int headerSize = 44;
   
   int[] bits = new int[bitCount];
-  int maxBits = (wavData.length - 44) / 2; 
+  int maxBits = (wavData.length - headerSize) / 2; 
   if (bits.length > maxBits) {
     println("Not enough space in audio file to embed image, please use a larger audio file.");
     exit();
@@ -121,7 +121,7 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
   println("(DEBUG) Bits in image = " + (bits.length - 24) + " should be " + imageWidth * imageHeight * 24);
-  println("(DEBUG) Max bits = " + maxBits);
+  println("(DEBUG) Max bits storable in wav file = " + maxBits);
   return bits;
 }
 

@@ -31,6 +31,10 @@ audio_encode:
 audio_decode:
 	processing-java --sketch=audio_processing/audio_decoder --run $(ARGS)
 
-# Image Diff - Removes default generated files.
+# Image Diff - Shows differences in RGB values of pixels.
+diff:
+	processing-java --sketch=image_processing/image_diff --run $(ARGS)
+
+# Clean - Removes default generated files.
 clean:
 	rm -f encoded.png encoded.wav

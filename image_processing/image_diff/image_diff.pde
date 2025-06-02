@@ -154,6 +154,3 @@ boolean parseArgs(){
   }
   return true;
 }
-
-// make diff ARGS="-m encoded.png -o dark.png"
-// make diff ARGS="-m encoded.png -o dark_manual.png"

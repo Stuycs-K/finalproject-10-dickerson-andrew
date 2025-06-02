@@ -109,10 +109,10 @@ boolean parseArgs() {
         String potentialPath = args[++i];
         File f = new File(potentialPath);
         if (f.exists() && f.isFile()) {
-          //println("debug: Using file path for input.");
+          println("debug: Using file path for input.");
           PLAINTEXT = loadTextFromFile(potentialPath);
         } else {
-          //println("debug: Using string literal for input.");
+          println("debug: Using string literal for input.");
           PLAINTEXT = potentialPath;
         }
       } catch(Exception e) {
