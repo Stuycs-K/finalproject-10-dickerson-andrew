@@ -1,26 +1,26 @@
 Full Encoder (runs both image and audio on the same args):
-make encode ARGS="-iP examples/cat.png -oP examples/encoded_cat.png -iM image_processing/image_encoder/encoded_cat.png -iA washing_machine_heart.wav -oA ex_full_output.wav -p examples/secret.txt -m GREEDY -d true"
+1. make encode ARGS="-iP ../../examples/input/cat.png -oP ../../examples/output/encoded_cat.png -iM ../../examples/input/image_processing/image_encoder/encoded_cat.png -iA washing_machine_heart.wav -oA ../../examples/output/ex_full_output.wav -p ../../examples/input/secret_short.txt -m GREEDY -d true"
 
 Full Decoder (runs both image and audio on the same args):
-make encode ARGS="-i examples/encoded.wav -oP full_hidden.png -o ../../examples/full_decoded.txt -m GREEDY -d TRUE"
+1. make encode ARGS="-i examples/input/encoded.wav -oP full_hidden.png -o ../../examples/output/full_decoded.txt -m GREEDY -d TRUE"
 
 Only Image Encoder:
-make image_encode ARGS="-i examples/cat.png -o ../../examples/image_encoded_cat.png -p examples/secret_message.txt -m GREEDY -d TRUE"
-make image_encode ARGS="-i examples/cat.png -o ../../examples/image_encoded_cat.png -p LookAtThisCoolSecretMessage -m GREEDY -d TRUE"
-make image_encode ARGS="-o ../../examples/ex_encoded_blank.png -p examples/lorem_ipsum.txt -m SELECTIVE -d TRUE"
+1A. Short Secret into Cat:          make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p ../../examples/secret_short.txt -m GREEDY -d FALSE"
+1B. Plain Text into Cat:            make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p LookAtThisCoolSecretMessage -m GREEDY -d FALSE"
+2. Lorem into Blank, Selective:     make image_encode ARGS="-o ../../examples/output/image_encoded.png -p examples/input/lorem_ipsum.txt -m SELECTIVE -d FALSE"
 
 Only Image Decoder:
-make image_decode ARGS="-i ../../examples/image_encoded_cat.png -o ../../examples/image_decoder_decoded_secret_message.txt -m GREEDY -d TRUE"
-make image_decode ARGS="-i ../../examples/image_decoded.png -o ../../examples/image_decoder_decoded_secret_message.txt -m GREEDY -d TRUE"
-make image_decode ARGS="-i ../../examples/encoded_blank.png -o ../../examples/image_decoder_decoded_lorem_ipsum.txt -m SELECTIVE -d TRUE"
+1A. Short Secret from Cat, Greedy:  make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d FALSE"
+1B. Plain Text from Cat, Greedy:    make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d FALSE"
+2. Lorem from Blank, Selective:     make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m SELECTIVE -d FALSE"
 
 Only Audio Encoder:
-make audio_encode ARGS="-iP examples/image_encoded_cat.png -iA ../../examples/washing_machine_heart.wav -o ../../examples/audio_encoded_secret_message.wav -d FALSE"
-make audio_encode ARGS="-iP examples/encoded_blank.png -iA ../../examples/washing_machine_heart.wav -o ../../examples/audio_encoded_lorem_ipsum.wav -d FALSE"
+1. Encoded Cat into Washing:        make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/washing_machine_heart.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
+2. Blank into Silent:               make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/5-min-silence.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
 
 Only Audio Decoder:
-make audio_decode ARGS="-i ../../examples/audio_encoded_secret_message.wav -o ../../examples/audio_cat_decoded.png -d FALSE -w 877 -h 946"
-make audio_decode ARGS="-i ../../examples/audio_encoded_lorem_ipsum.wav -o ../../examples/audio_blank_decoded.png -d FALSE -w 877 -h 946"
+1. Encoded Cat and Washing:         make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 877 -h 946"
+2. Blank into Silent:               make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 1200 -h 600"
 
 
 ffmpeg -i washing_machine_heart.wav -ac 1 -ar 44100 -sample_fmt s16 washing_machine_heart.wav

@@ -30,6 +30,9 @@ void setup() {
     for (int i = 0; i < 24; i++) {
       messageLength = (messageLength << 1) | headerBits[i];
     }
+
+    int bitCapacity = (wavData.length - 44);
+    println("Available bits: " + bitCapacity);
     
     int[] extractedBits = extractBitsFromWav(wavData, 24 + messageLength);
     int[] imageBits = subset(extractedBits, 24);
@@ -117,7 +120,7 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   for (int i = headerSize + 1; i < wavData.length && bitIndex < bitCount; i += step) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
-
+  println("debug: Num bits = " + bits.length + " should be " + width * height * 24);
   return bits;
 }
 

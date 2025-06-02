@@ -112,9 +112,6 @@ boolean parseArgs() {
           //println("debug: Using file path for input.");
           PLAINTEXT = loadTextFromFile(potentialPath);
         } else {
-          if (potentialPath.contains(".txt") || potentialPath.contains("/")) {
-            println("File not found.");
-          }
           //println("debug: Using string literal for input.");
           PLAINTEXT = potentialPath;
         }
