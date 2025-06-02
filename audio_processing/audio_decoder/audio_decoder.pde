@@ -13,7 +13,7 @@ void setup() {
 
   if (args == null || args.length == 0) {
     println("Invalid or missing arguments.");
-    println("Usage: -iA <inputAudio> -o <outputImage> -d <displayImage?>");
+    println("Usage: -iA <inputAudio> -o <outputImage> -d <displayImage?> -w <imageWidth> -h <imageHeight>");
     exit();
   }
 
