@@ -13,7 +13,7 @@ void setup() {
 
   if (args == null || args.length == 0) {
     println("Invalid or missing arguments.");
-    println("Usage: -iA <inputAudio> -o <outputImage> -d <displayImage?> -w <imageWidth> -h <imageHeight>");
+    println("Usage: -iA <inputAudio> -oA <outputImage> -dA <displayImage?>");
     exit();
   }
 
@@ -63,19 +63,19 @@ boolean parseArgs() {
         return false;
       }
     }
-    if (args[i].equals("-o")) {
+    if (args[i].equals("-oA")) {
       try { 
       outputImage = args[++i];
       } catch(Exception e) {
-        println("-o requires image file path as next argument.");
+        println("-oA requires image file path as next argument.");
         return false;
       }
     }
-    if (args[i].equals("-d")) {
+    if (args[i].equals("-dA")) {
       try { 
       displayImage = args[++i];
       } catch(Exception e) {
-        println("-d requires boolean (True/False) as next argument");
+        println("-dA requires boolean (True/False) as next argument");
         return false;
       }
     }

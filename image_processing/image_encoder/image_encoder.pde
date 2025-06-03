@@ -43,7 +43,7 @@ void setup() {
   //println("(DEBUG) Working directory: " + new File(".").getAbsolutePath());
   if (args == null || !parseArgs()) {
     println("Invalid or missing arguments.");
-    println("Usage: -i input.png -o output.png -p 'message_here' -d true -m MODE");
+    println("Usage: -iI input.png -oI output.png -p 'message_here' -dI true -m MODE");
     exit();
   return;
   }
@@ -87,7 +87,7 @@ void settings() {
 
 boolean parseArgs() {
   for (int i = 0; i < args.length; i++) {
-    if (args[i].equals("-i")) {
+    if (args[i].equals("-iI")) {
       try {
         String potentialPath = args[++i];
         File f = new File(potentialPath);
@@ -95,11 +95,11 @@ boolean parseArgs() {
           //println("(DEBUG) Using file path for input.");
           INPUTFILENAME = potentialPath;
         } else {
-          println("WARNING: Invalid file path or file does not exist. Defaulting to ");
+          println("WARNING: Invalid file path or file does not exist. Defaulting to plain text.");
           INPUTFILENAME = "";
         }
       } catch(Exception e) {
-        println("-p requires plain text or text file path as next argument.");
+        println("-iI requires image file path as next argument.");
         return false;
       }
     }
@@ -107,7 +107,7 @@ boolean parseArgs() {
       try { 
       OUTPUTFILENAME = args[++i];
       } catch(Exception e) {
-        println("-o requires .wav file path as next argument.");
+        println("-oI requires .wav file path as next argument.");
         return false;
       }
     }
@@ -127,11 +127,11 @@ boolean parseArgs() {
         return false;
       }
     }
-    if (args[i].equals("-d")) {
+    if (args[i].equals("-dI")) {
       try { 
       DISPLAYMODE = args[++i];
       } catch(Exception e) {
-        println("-d requires boolean (True/False) as next argument");
+        println("-dI requires boolean (True/False) as next argument");
         return false;
       }
     }

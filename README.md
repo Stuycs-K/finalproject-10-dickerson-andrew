@@ -33,40 +33,44 @@ The user may also determine the mode of encoding for the image using the `-m` fl
 
 For more information on the flags and usage of the program, a comprehensive guide to the purpose, name, and flags usage for each program has been provided below.
 
-Note that the "Full Encoder/Decoder" represents the project as a whole, the "Audio Encoder/Decoder" is comprised of parts new for this project, and the "Image Encoder/Decoder" is based largely of its respective lab, with some changes for compatability and ease of use within the "Full Encoder/Decoder".
+Note that the "Full Encoder/Decoder" represents the project as a whole, "Audio Encoder/Decoder" is comprised of parts new for this project, and the "Image Encoder/Decoder" is based largely of its respective lab, but with changes for compatability with the "Full Encoder/Decoder".
 
 **Full Encoder** - Hides message from plaintext or file in an image and then hides that image in an audio file.
 make encode:
-- -iP : input image path (default = none, a blank, white image will be generated for use instead)
-- -oP : output image path (default = "encoded.png")
-- -iM : intermediate image path; input image path for audio encoding (default = path specified in -oP)
-- -iA : input image path (default = "examples/oxp.wav")
-- -oA : output audio path (default = "examples/encoded.wav")
-- -p : plaintext message or text file name (default = "examples/secret.txt")
+- -iI : input image path for image_encoder (default = none, a blank, white image will be generated for use instead)
+- -oI : output image path for image_encoder (default = "encoded.png")
+- -p : plaintext message or text file name (required; default = "secret.txt")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
-- -d : display image after encoding ("true"/"false", default = "false")
+- -dI : display image after encoding ("true"/"false", default = "false")
+
+- -iP : input image path for audio_encoder (default = "encoded.png")
+- -iA : input image path for audio_encoder  (default = "oxp.wav")
+- -oA : output audio path for audio_encoder  (default = "encoded.wav")
+- -dA : display wave after encoding ("true"/"false", default = "false")
 
 **Full Decoder** - Finds an image hidden in an audio file, and then the message hidden in that image.
 make decode:
-- -i : input audio path (default = "obv.wav")
-- -oP : output image path (default = "encoded.png")
-- -o : output decoded path (default = "decoded.txt")
+- -iA : input audio path for audio_encoder (default = "obv.wav")
+- -oA : output image path for audio_encoder (default = "encoded.png")
+- -dA : display image after encoding ("true"/"false", default = "false")
+
+- -iI : input image path for image_encoder (default = none, a blank, white image will be generated for use instead)
+- -oI : output decoded path for image_encoder (default = "encoded.png")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
-- -d : display image after encoding ("true"/"false", default = "false")
 
 **Image Encoder** - Hides message from plaintext or file in an image.
 make image_encode:
-- -i : input image path (default = none, a blank, white image will be generated for use instead)
-- -o : output image path (default = "encoded.png")
+- -iI : input image path (default = none, a blank, white image will be generated for use instead)
+- -oI : output image path (default = "encoded.png")
 - -p : plaintext message or text file name (required; default = "secret.txt")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
-- -d : display image after encoding ("true"/"false", default = "false")
+- -dI : display image after encoding ("true"/"false", default = "false")
 
 **Image Decoder** - Finds a message hidden in an image.
 make image_decode:
-- -i : input image path (default = none, a blank, white image will be generated for use instead)
-- -o : output decoded path (default = "encoded.png")
+- -iI : input image path (default = none, a blank, white image will be generated for use instead)
+- -oI : output decoded path (default = "encoded.png")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
@@ -74,14 +78,17 @@ make image_decode:
 make audio_encode:
 - -iP : input image path (default = "encoded.png")
 - -iA : input image path (default = "oxp.wav")
-- -o : output audio path (default = "encoded.wav")
-- -d : display wave after encoding ("true"/"false", default = "false")
+- -oA : output audio path (default = "encoded.wav")
+- -dA : display wave after encoding ("true"/"false", default = "false")
 
 **Audio Decoder** - Finds a message hidden in an audio file.
 make audio_decode:
-- -i : input audio path (default = "obv.wav")
-- -o : output image path (default = "encoded.png")
-- -d : display image after encoding ("true"/"false", default = "false")
+- -iA : input audio path (default = "obv.wav")
+- -oA : output image path (default = "encoded.png")
+- -dA : display image after encoding ("true"/"false", default = "false")
+
+**Clean** - Removes default generated output files.
+- No flags, just run `make clean`.
 
 For Example Make Commands, see `examples/ex_make_commands`
 

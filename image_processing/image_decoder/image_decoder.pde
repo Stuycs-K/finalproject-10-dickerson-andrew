@@ -105,7 +105,7 @@ void setup()
 {
   if(args==null){
     println("no arguments provided");
-    println("flags: -i INPUTFILENAME -o OUTPUTFILENAME -b NUMBER_OF_ENCODED_BYTES -m MODE (GREEDY/SELECTIVE/FILE)");
+    println("flags: -iI INPUTFILENAME -oI OUTPUTFILENAME -b NUMBER_OF_ENCODED_BYTES -m MODE (GREEDY/SELECTIVE/FILE)");
     return;
   }
   if(!parseArgs()){
@@ -145,16 +145,16 @@ boolean parseArgs(){
   if (args != null) {
     for (int i = 0; i < args.length; i++){
 
-      if(args[i].equals("-i")){
+      if(args[i].equals("-iI")){
         try{
           INPUTFILENAME=args[i+1];
         }catch(Exception e){
-          println("-o requires filename as next argument");
+          println("-iI requires filename as next argument");
           return false;
         }
       }
 
-      if(args[i].equals("-o")){
+      if(args[i].equals("-oI")){
         hasOutputFile = true;
         if(args[i+1]!=null){
           OUTPUTFILENAME=args[i+1];
@@ -162,7 +162,7 @@ boolean parseArgs(){
             println("WARNING: Saving binary data to a .txt file may not be readable.");
           }
         }else{
-          println("-o requires filename as next argument");
+          println("-oI requires filename as next argument");
           return false;
         }
       }
