@@ -86,3 +86,9 @@ This document must be updated daily every time you finish a work session.
 - Fixed issue with flag listing when receiving invalid arguments for `audio_decoder`.
 - Added more test cases with clearer input image.
 - Narrowed down issue to insufficient space in wav file for encoding full image with current encoding methods.
+
+### 2025-06-2 - Debugging and compatability fixes.
+- Wrote audio diff for finding issues in audio encoder and decoder
+- Fixed issue where wav file could be too small to contain image.
+- Added encoding image dimensions into audio file to remove -w and -h flags.
+- Began fixing issue where encoded wav file is not valid wav file.
