@@ -40,7 +40,7 @@ String loadTextFromFile(String filepath) {
 }
 
 void setup() {
-  //println("debug: Working directory: " + new File(".").getAbsolutePath());
+  //println("(DEBUG) Working directory: " + new File(".").getAbsolutePath());
   if (args == null || !parseArgs()) {
     println("Invalid or missing arguments.");
     println("Usage: -i input.png -o output.png -p 'message_here' -d true -m MODE");
@@ -49,11 +49,10 @@ void setup() {
   }
 
   if (INPUTFILENAME.equals("")) {
-    println("No input image provided, generating blank 1200x600 image.");
-    img = createImage(1200, 600, RGB);
+    img = createImage(100, 100, RGB);
     img.loadPixels();
   for (int i = 0; i < img.pixels.length; i++) {
-    img.pixels[i] = color(255, 255, 255);
+    img.pixels[i] = color(0, 0, 0);
   }
     img.updatePixels();
   } else {
@@ -76,7 +75,7 @@ void settings() {
   PImage temp;
   if (args != null && parseArgs()) {
     if (INPUTFILENAME.equals("")) {
-      size(1200, 600);
+      size(100, 100);
     } else {
       temp = loadImage(INPUTFILENAME);
       size(temp.width, temp.height);
@@ -89,10 +88,18 @@ void settings() {
 boolean parseArgs() {
   for (int i = 0; i < args.length; i++) {
     if (args[i].equals("-i")) {
-      try { 
-        INPUTFILENAME = args[++i]; 
+      try {
+        String potentialPath = args[++i];
+        File f = new File(potentialPath);
+        if (f.exists() && f.isFile()) {
+          //println("(DEBUG) Using file path for input.");
+          INPUTFILENAME = potentialPath;
+        } else {
+          println("WARNING: Invalid file path or file does not exist. Defaulting to ");
+          INPUTFILENAME = "";
+        }
       } catch(Exception e) {
-        println("-i requires image file path as next argument.");
+        println("-p requires plain text or text file path as next argument.");
         return false;
       }
     }
@@ -109,10 +116,10 @@ boolean parseArgs() {
         String potentialPath = args[++i];
         File f = new File(potentialPath);
         if (f.exists() && f.isFile()) {
-          println("debug: Using file path for input.");
+          //println("(DEBUG) Using file path for input.");
           PLAINTEXT = loadTextFromFile(potentialPath);
         } else {
-          println("debug: Using string literal for input.");
+          //println("(DEBUG) Using string literal for input.");
           PLAINTEXT = potentialPath;
         }
       } catch(Exception e) {
@@ -210,8 +217,8 @@ void modifyImage(PImage img, int[]messageArray) {
           int encodedBlue = b & 0xFC;
           int messageBit = messageArray[messageIndex]; 
           encodedBlue = encodedBlue | (messageBit & 0x03);
-          //println(debug: String.format("%8s", Integer.toBinaryString(encodedBlue)).replace(" ", "0"));
-          //println(debug: messageArray[messageIndex]);
+          //println((DEBUG) String.format("%8s", Integer.toBinaryString(encodedBlue)).replace(" ", "0"));
+          //println((DEBUG) messageArray[messageIndex]);
           img.pixels[i] = color(r, g, encodedBlue);
           messageIndex++;
         } else if (messageIndex >= messageArray.length) {
@@ -223,7 +230,7 @@ void modifyImage(PImage img, int[]messageArray) {
   }
 
   //write the pixel array back to the image.
-  //println(debug: +"Usable Pixels: "+usable_pixels);
+  //println((DEBUG) +"Usable Pixels: "+usable_pixels);
   img.updatePixels();
 }
 
@@ -256,7 +263,7 @@ int [] messageToArray(String s) {
    So your data array would look like this:
    { 1, 1, 1, 0, 1, 2, 2, 0, 1, 2, 2, 1, 1, 3, 0, 3...}
    */
-  //println(debug: Arrays.toString(parts));
+  //println((DEBUG) Arrays.toString(parts));
   return parts;
 }
 

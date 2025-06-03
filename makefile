@@ -15,13 +15,13 @@ decode:
 image_encode:
 	processing-java --sketch=image_processing/image_encoder --run $(ARGS)
 
-# Image Diff - Highlights differences between pixels in images.
-image_diff:
-	processing-java --sketch=image_processing/image_diff --run $(ARGS)
-
 # Image Decoder - Finds a message hidden in an image.
 image_decode:
 	processing-java --sketch=image_processing/image_decoder --run $(ARGS)
+
+# Image Diff - Highlights differences between pixels in images.
+image_diff:
+	processing-java --sketch=image_processing/image_diff --run $(ARGS)
 
 # Audio Encoder - Hides message from plaintext or file in an audio file.
 audio_encode:
@@ -31,10 +31,10 @@ audio_encode:
 audio_decode:
 	processing-java --sketch=audio_processing/audio_decoder --run $(ARGS)
 
-# Image Diff - Shows differences in RGB values of pixels.
-diff:
-	processing-java --sketch=image_processing/image_diff --run $(ARGS)
+# Image Diff - Highlights differences between bits in wav files.
+audio_diff:
+	processing-java --sketch=audio_processing/audio_diff --run $(ARGS)
 
-# Clean - Removes default generated files.
+# Clean - Removes default generated output files.
 clean:
-	rm -f encoded.png encoded.wav
+	rm -f examples/output/audio_decoded.png examples/output/image_encoded.png examples/output/audio_encoded.wav examples/output/image_decoded.txt

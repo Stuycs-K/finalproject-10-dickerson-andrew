@@ -152,6 +152,21 @@ byte[] embedBitsInWav(byte[] wavData, int[] bits) {
 
 void saveWav(byte[] data, String filename) throws IOException {
   //println("debug: SAVING WAV");
+  printHeaderInfo(data);
+  
+  int fileSize = data.length;
+  int chunkSize = fileSize - 8;
+  data[4] = (byte)(chunkSize & 0xFF);
+  data[5] = (byte)((chunkSize >> 8) & 0xFF);
+  data[6] = (byte)((chunkSize >> 16) & 0xFF);
+  data[7] = (byte)((chunkSize >> 24) & 0xFF);
+  
+  int subchunk2Size = fileSize - 44;
+  data[40] = (byte)(subchunk2Size & 0xFF);
+  data[41] = (byte)((subchunk2Size >> 8) & 0xFF);
+  data[42] = (byte)((subchunk2Size >> 16) & 0xFF);
+  data[43] = (byte)((subchunk2Size >> 24) & 0xFF);
+  
   FileOutputStream fos = new FileOutputStream(sketchPath(filename));
   fos.write(data);
   fos.close();
@@ -159,11 +174,18 @@ void saveWav(byte[] data, String filename) throws IOException {
   if (displayImage.toLowerCase().equals("true")) {
     //OPEN THE WAVE IN AUDACITY
   }
- 
+  printHeaderInfo(data);
 }
 
 boolean checkCapacity(byte[] wavData, int bitCount) {
   int headerSize = 44;
   int maxBits = (wavData.length - headerSize) / 2;
   return bitCount <= maxBits;
+}
+
+void printHeaderInfo(byte[] data) {
+  int chunkSize = (data[7] & 0xFF) << 24 | (data[6] & 0xFF) << 16 | (data[5] & 0xFF) << 8 | (data[4] & 0xFF);
+  int subchunk2Size = (data[43] & 0xFF) << 24 | (data[42] & 0xFF) << 16 | (data[41] & 0xFF) << 8 | (data[40] & 0xFF);
+  println("(DEBUG) ChunkSize: " + chunkSize);
+  println("(DEBUG) Subchunk2Size: " + subchunk2Size);
 }
