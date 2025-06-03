@@ -27,6 +27,14 @@ void setup() {
 
   try {
     byte[] wavData = loadWav(inputAudio);
+    
+    if (!checkCapacity(wavData, messageBits.length)) {
+      println("ERROR: The image is too large to embed in the provided audio file.");
+      println("Bits required: " + messageBits.length);
+      println("Bits available: " + ((wavData.length - 44) / 2));
+      exit();
+    }
+    
     byte[] encodedWav = embedBitsInWav(wavData, messageBits);
     saveWav(encodedWav, outputAudio);
   } catch (Exception e) {
@@ -143,4 +151,10 @@ void saveWav(byte[] data, String filename) throws IOException {
     //OPEN THE WAVE IN AUDACITY
   }
  
+}
+
+boolean checkCapacity(byte[] wavData, int bitCount) {
+  int headerSize = 44;
+  int maxBits = (wavData.length - headerSize) / 2;
+  return bitCount <= maxBits;
 }

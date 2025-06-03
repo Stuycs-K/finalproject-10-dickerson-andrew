@@ -31,8 +31,8 @@ void setup() {
       messageLength = (messageLength << 1) | headerBits[i];
     }
 
-    int bitCapacity = (wavData.length - 44);
-    println("(DEBUG) Total bits in audio: " + bitCapacity);
+    int bitCapacity = (wavData.length - 44) / 2; 
+    println("(DEBUG) Bit space in wav (w/ step = 2): " + bitCapacity);
     
     int[] extractedBits = extractBitsFromWav(wavData, 24 + messageLength);
     int[] imageBits = subset(extractedBits, 24);
@@ -108,20 +108,13 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   int headerSize = 44;
   
   int[] bits = new int[bitCount];
-  int maxBits = (wavData.length - headerSize) / 2; 
-  if (bits.length > maxBits) {
-    println("Not enough space in audio file to embed image, please use a larger audio file.");
-    exit();
-  }
-  
   int bitIndex = 0;
   int step = 2;
 
   for (int i = headerSize + 1; i < wavData.length && bitIndex < bitCount; i += step) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
-  println("(DEBUG) Bits in image = " + (bits.length - 24) + " should be " + imageWidth * imageHeight * 24);
-  println("(DEBUG) Max bits storable in wav file = " + maxBits);
+  println("(DEBUG) Bits extracted from wav = " + (bits.length - 24) + " should be " + imageWidth * imageHeight * 24);
   return bits;
 }
 
