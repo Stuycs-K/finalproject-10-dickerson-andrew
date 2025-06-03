@@ -6,7 +6,7 @@ Full Decoder (runs both image and audio on the same args):
 
 Image Encoder:
 1A. Short Secret into Cat:          make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p examples/input/secret_short.txt -m GREEDY -d FALSE"
-1B. Plain Text into Cat:            make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p LookAtThisCoolSecretMessage -m GREEDY -d FALSE"
+1B. Plain Text into Cat:            make image_encode ARGS="-i ../../examples/input/cat.png -o ../../examples/output/image_encoded.png -p msg -m GREEDY -d FALSE"
 2. Lorem into Blank, Selective:     make image_encode ARGS="-o ../../examples/output/image_encoded.png -p examples/input/lorem_ipsum.txt -m SELECTIVE -d FALSE"
 3. Short Secret into Rainbow:       make image_encode ARGS="-i ../../examples/input/rainbow.png -o ../../examples/output/image_encoded.png -p examples/input/secret_short.txt -m GREEDY -d FALSE"
 
@@ -16,19 +16,24 @@ Image Decoder:
 2. Lorem from Blank, Selective:     make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m SELECTIVE -d FALSE"
 3. Short from Rainbow, Greedy:      make image_decode ARGS="-i ../../examples/output/image_encoded.png -o ../../examples/output/image_decoded.txt -m GREEDY -d FALSE"
 
+Image Diff:
+1. Cat diff:                        make image_diff ARGS="-m ../../examples/output/audio_decoded.png -o ../../examples/output/image_encoded.png"
+2. Blank diff:                      make image_diff ARGS="-m ../../examples/output/audio_decoded.png -o ../../examples/output/image_encoded.png"
+3. Rainbow diff:                    make image_diff ARGS="-m ../../examples/output/audio_decoded.png -o ../../examples/output/image_encoded.png"
+
 Audio Encoder:
 1. Encoded Cat into Washing:        make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/washing_machine_heart.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
 2. Blank into Silent:               make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/5-min-silence.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
 3. Rainbow into Washing:            make audio_encode ARGS="-iP ../../examples/output/image_encoded.png -iA ../../examples/input/washing_machine_heart.wav -o ../../examples/output/audio_encoded.wav -d FALSE"
 
 Audio Decoder:
-1. Encoded Cat from Washing:        make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 877 -h 946"
-2. Blank from Silent:               make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 1200 -h 600"
-3. Rainbow from Washing:            make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE -w 800 -h 200"
+1. Encoded Cat from Washing:        make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE"
+2. Blank from Silent:               make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE"
+3. Rainbow from Washing:            make audio_decode ARGS="-i ../../examples/output/audio_encoded.wav -o ../../examples/output/audio_decoded.png -d FALSE"
 
-Image Diff:
-1. Cat diff:                        make diff ARGS="-m ../../examples/output/audio_decoded.png -o ../../examples/output/image_encoded.png"
-2. Blank diff:                      make diff ARGS="-m ../../examples/output/audio_decoded.png -o ../../examples/output/image_encoded.png"
-3. Rainbow diff:                    make diff ARGS="-m ../../examples/output/audio_decoded.png -o ../../examples/output/image_encoded.png"
+Audio Diff:
+1. Cat diff:                        make audio_diff ARGS="-m ../../examples/output/audio_encoded.wav -o ../../examples/input/washing_machine_heart.wav -v FALSE"
+2. Blank diff:                      make audio_diff ARGS="-m ../../examples/output/audio_encoded.wav -o ../../examples/input/5-min-silence.wav -v FALSE"
+3. Rainbow diff:                    make audio_diff ARGS="-m ../../examples/output/audio_encoded.wav -o ../../examples/input/washing_machine_heart.wav -v FALSE"
 
 ffmpeg -i washing_machine_heart.wav -ac 1 -ar 44100 -sample_fmt s16 washing_machine_heart.wav

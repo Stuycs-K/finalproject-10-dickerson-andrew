@@ -104,14 +104,23 @@ int[] imageToBitArray(PImage img) {
     }
   }
 
-  int[] bitArray = new int[bits.size() + 24];
   int messageLength = bits.size();
+  int width = img.width;
+  int height = img.height;
+  
+  int[] bitArray = new int[messageLength + 24 + 16 + 16];
+  
   for (int i = 0; i < 24; i++) {
     bitArray[i] = (messageLength >> (23 - i)) & 1;
   }
-
+  for (int i = 0; i < 16; i++) {
+    bitArray[24 + i] = (width >> (15 - i)) & 1;
+  }
+  for (int i = 0; i < 16; i++) {
+    bitArray[24 + 16 + i] = (height >> (15 - i)) & 1;
+  }
   for (int i = 0; i < bits.size(); i++) {
-    bitArray[i+24] = bits.get(i);
+    bitArray[24 + 16 + 16 + i] = bits.get(i);
   }
   
   return bitArray;

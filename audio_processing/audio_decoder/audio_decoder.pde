@@ -5,8 +5,8 @@ PImage decodedImage;
 String outputImage = "decoded.png";
 String inputAudio = "encoded.wav";
 String displayImage = "false";
-int imageWidth = 100;
-int imageHeight = 100;
+int imageWidth = 0;
+int imageHeight = 0;
 
 void setup() {
   size(200, 200);
@@ -23,19 +23,25 @@ void setup() {
   }
 
   try {
-    byte[] wavData = loadWav(inputAudio);
-    
-    int[] headerBits = extractBitsFromWav(wavData, 24);
+    byte[] wavData = loadWav(inputAudio);  
+    int[] headerBits = extractBitsFromWav(wavData, 56);
+  
     int messageLength = 0;
     for (int i = 0; i < 24; i++) {
       messageLength = (messageLength << 1) | headerBits[i];
+    }
+    for (int i = 0; i < 16; i++) {
+      imageWidth = (imageWidth << 1) | headerBits[24 + i];
+    }
+    for (int i = 0; i < 16; i++) {
+      imageHeight = (imageHeight << 1) | headerBits[24 + 16 + i];
     }
 
     int bitCapacity = (wavData.length - 44) / 2; 
     println("(DEBUG) Bit space in wav (w/ step = 2): " + bitCapacity);
     
-    int[] extractedBits = extractBitsFromWav(wavData, 24 + messageLength);
-    int[] imageBits = subset(extractedBits, 24);
+    int[] extractedBits = extractBitsFromWav(wavData, 56 + messageLength);
+    int[] imageBits = subset(extractedBits, 56);
 
     decodedImage = bitArrayToImage(imageBits, imageWidth, imageHeight);
     decodedImage.save(outputImage);
@@ -73,22 +79,6 @@ boolean parseArgs() {
         return false;
       }
     }
-    if (args[i].equals("-w")) {
-      try { 
-      imageWidth = int(args[++i]);
-      } catch(Exception e) {
-        println("-w requires integer as next argument");
-        return false;
-      }
-    }
-    if (args[i].equals("-h")) {
-      try { 
-      imageHeight = int(args[++i]);
-      } catch(Exception e) {
-        println("-h requires integer as next argument");
-        return false;
-      }
-    }
   }
   return true;
 }
@@ -114,7 +104,7 @@ int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   for (int i = headerSize + 1; i < wavData.length && bitIndex < bitCount; i += step) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
-  println("(DEBUG) Bits extracted from wav = " + (bits.length - 24) + " should be " + imageWidth * imageHeight * 24);
+  println("(DEBUG) Bits extracted from wav = " + (bits.length - 56) + " should be " + imageWidth * imageHeight * 24);
   return bits;
 }
 

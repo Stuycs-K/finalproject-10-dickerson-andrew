@@ -37,7 +37,7 @@ Note that the "Full Encoder/Decoder" represents the project as a whole, the "Aud
 
 **Full Encoder** - Hides message from plaintext or file in an image and then hides that image in an audio file.
 make encode:
-- -iP : input image path (default = none, a blank, black image will be generated for use instead)
+- -iP : input image path (default = none, a blank, white image will be generated for use instead)
 - -oP : output image path (default = "encoded.png")
 - -iM : intermediate image path; input image path for audio encoding (default = path specified in -oP)
 - -iA : input image path (default = "examples/oxp.wav")
@@ -54,12 +54,10 @@ make decode:
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 - -d : display image after encoding ("true"/"false", default = "false")
-- -w : output image width (default = 100)
-- -h : display image height (default = 100)
 
 **Image Encoder** - Hides message from plaintext or file in an image.
 make image_encode:
-- -i : input image path (default = none, a blank, black image will be generated for use instead)
+- -i : input image path (default = none, a blank, white image will be generated for use instead)
 - -o : output image path (default = "encoded.png")
 - -p : plaintext message or text file name (required; default = "secret.txt")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
@@ -67,7 +65,7 @@ make image_encode:
 
 **Image Decoder** - Finds a message hidden in an image.
 make image_decode:
-- -i : input image path (default = none, a blank, black image will be generated for use instead)
+- -i : input image path (default = none, a blank, white image will be generated for use instead)
 - -o : output decoded path (default = "encoded.png")
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
@@ -84,8 +82,6 @@ make audio_decode:
 - -i : input audio path (default = "obv.wav")
 - -o : output image path (default = "encoded.png")
 - -d : display image after encoding ("true"/"false", default = "false")
-- -w : output image width (default = 100)
-- -h : display image height (default = 100)
 
 For Example Make Commands, see `examples/ex_make_commands`
 
