@@ -3,7 +3,7 @@
 ## Full Encoder (Runs both image and audio encoders on the same args):
 1. Encodes the message from `examples/input/lorem_ipsum.txt`, using the `GREEDY` mode, into the image `examples/input/cat.png`. Then encodes the encoded image result, `../../examples/output/image_encoded.png` into the audio file `../../examples/input/solar.wav`. The final result is stored in the file `../../examples/output/audio_encoded.wav`, but is not automatically displayed.
 
-> make encode ARGS="-iI examples/input/cat.png -oI ../../examples/output/image_encoded.png -p examples/input/lorem_ipsum.txt' -m GREEDY -dI FALSE -iP ../../examples/output/image_encoded.png -iA ../../examples/input/solar.wav -oA ../../examples/output/audio_encoded.wav -dA FALSE"
+> make encode ARGS="-iI examples/input/cat.png -oI ../../examples/output/image_encoded.png -p examples/input/lorem_ipsum.txt -m GREEDY -dI FALSE -iP ../../examples/output/image_encoded.png -iA ../../examples/input/solar.wav -oA ../../examples/output/audio_encoded.wav -dA FALSE"
 
 2. Encodes the message from `examples/input/secret_short.txt`, using the `SELECTIVE` mode, into a blank, 100 pixel by 100 pixel, white image, since no input image was provided. Then encodes the encoded image result, `../../examples/output/image_encoded.png` into the audio file `../../examples/input/silence.wav`. The final result is stored in the file `../../examples/output/audio_encoded.wav`, but is not automatically displayed.
 
