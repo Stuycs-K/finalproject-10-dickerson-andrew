@@ -9,7 +9,7 @@
 
 > make encode ARGS="-oI ../../examples/output/image_encoded.png -p examples/input/secret_short.txt -m GREEDY -dI FALSE -iP ../../examples/output/image_encoded.png -iA ../../examples/input/silence.wav -oA ../../examples/output/audio_encoded.wav"
 
-3. Encodes the plaintext message, "This is a secret message", using the `GREEDY` mode, into the image `../../examples/input/rainbow.png`. Then encodes the encoded image result, `../../examples/output/image_encoded.png` into the audio file `../../examples/input/solar.wav`. The final result is stored in the file `../../examples/output/audio_encoded.wav`, but is not automatically displayed.
+3. Encodes the plaintext message, "This is a plain text secret message", using the `GREEDY` mode, into the image `../../examples/input/rainbow.png`. Then encodes the encoded image result, `../../examples/output/image_encoded.png` into the audio file `../../examples/input/solar.wav`. The final result is stored in the file `../../examples/output/audio_encoded.wav`, but is not automatically displayed.
 
 > make encode ARGS="-iI examples/input/rainbow.png -oI ../../examples/output/image_encoded.png -p 'This is a plain text secret message' -m GREEDY -dI FALSE -iP ../../examples/output/image_encoded.png -iA ../../examples/input/solar.wav -oA ../../examples/output/audio_encoded.wav"
 
