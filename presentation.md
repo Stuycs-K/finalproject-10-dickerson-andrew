@@ -1,11 +1,15 @@
 # Presentation Outline
 1. Contents of `README.md`:
+
 	a. Project Description / Overview
-	b. Instructions
-	c. Flags for each sketch
+	
+ 	b. Instructions
+	
+ 	c. Flags for each sketch
+
 	d. References
 
-2. `image_encoder`
+4. `image_encoder`
 	a. Review of Functionality of `image_encoder`.
 		Takes a message in the form of plaintext or a TXT file path and encodes an image with a hidden message using least significant bit (LSB) encoding.
 	
@@ -32,7 +36,7 @@
 	
 	c. Running test cases from `example_make_commands`.
 
-4. `audio_encoder`
+5. `audio_encoder`
 	a. Introduction to functionality of `image_encoder`.
 		This sketch takes a PNG image that is already encoded with a hidden message and embeds the pixels of this image into the LSBs of a WAV audio file.
 	
