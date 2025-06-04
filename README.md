@@ -17,7 +17,7 @@ The decoder works essentially by doing everything in reverse. It takes the alter
 
 The user runs the program by executing a make command for the respective program they are attempting to run.
 
-Example make commands have been provided in `examples/ex_make_commands.txt`.
+Example make commands have been provided in `examples/example_make_commands.txt`.
 
 These example commands use example files that are also located in the `examples` directory.
 
@@ -103,7 +103,7 @@ make audio_diff:
 **Clean** - Removes default generated output files.
 - No flags, just run `make clean`.
 
-For Example Make Commands, see `examples/ex_make_commands`
+For Example Make Commands, see `examples/example_make_commands`
 
 ### Resources/ References:
 
