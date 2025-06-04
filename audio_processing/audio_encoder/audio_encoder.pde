@@ -5,7 +5,6 @@ PImage encodedImage;
 String inputImage = "encoded.png";
 String inputAudio = "base.wav";
 String outputAudio = "output.wav";
-String displayImage = "false";
 int[] messageBits;
 
 void setup() {
@@ -13,7 +12,7 @@ void setup() {
  
   if (args == null || args.length == 0) {
     println("Invalid or missing arguments.");
-    println("Usage: -iP <inputImage> -iA <inputAudio> -oA <outputAudio>  -dA <displayImage?>");
+    println("Usage: -iP <inputImage> -iA <inputAudio> -oA <outputAudio>");
     exit();
   }
 
@@ -30,8 +29,8 @@ void setup() {
     
     if (!checkCapacity(wavData, messageBits.length)) {
       println("ERROR: The image is too large to embed in the provided audio file.");
-      println("Bits required: " + messageBits.length);
-      println("Bits available: " + ((wavData.length - 44) / 2));
+      println("(DEBUG) Bits required: " + messageBits.length);
+      println("(DEBUG) Bits available: " + ((wavData.length - 44) / 2));
       exit();
     }
     
@@ -45,7 +44,7 @@ void setup() {
 }
 
 boolean parseArgs() {
-  //println("debug: PARSING ARGS");
+  //println("(DEBUG) PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
     if (args[i].equals("-iP")) {
       try { 
@@ -71,21 +70,12 @@ boolean parseArgs() {
         return false;
       }
     }
-    if (args[i].equals("-dA")) {
-      try { 
-      displayImage = args[++i];
-      } catch(Exception e) {
-        println("-dA requires boolean (True/False) as next argument");
-        return false;
-      }
-    }
-    
   }
   return true;
 }
 
 int[] imageToBitArray(PImage img) {
-  //println("debug: CONVERTING IMG TO BITS");
+  //println("(DEBUG) CONVERTING IMG TO BITS");
   img.loadPixels();
   ArrayList<Integer> bits = new ArrayList<Integer>();
   for (color c : img.pixels) {
@@ -123,11 +113,17 @@ int[] imageToBitArray(PImage img) {
     bitArray[24 + 16 + 16 + i] = bits.get(i);
   }
   
+  //println("(DEBUG) Message length: " + messageLength);
+  //println("(DEBUG) Image width: " + width);
+  //println("(DEBUG) Image height: " + height);
+  //print("(DEBUG) Header bits: ");
+  //for (int i = 0; i < 56; i++) print(bitArray[i]);
+  //println();
   return bitArray;
 }
 
 byte[] loadWav(String filename) throws IOException {
-  //println("debug: LOADING WAV");
+  //println("(DEBUG) LOADING WAV");
   File file = new File(sketchPath(filename));
   byte[] data = new byte[(int) file.length()];
   FileInputStream f = new FileInputStream(file);
@@ -137,12 +133,12 @@ byte[] loadWav(String filename) throws IOException {
 }
 
 byte[] embedBitsInWav(byte[] wavData, int[] bits) {
-  //println("debug: EMBEDDING BITS");
+  //println("(DEBUG) EMBEDDING BITS");
   int headerSize = 44;
   int bitIndex = 0;
   int step = 2;
 
-  for (int i = headerSize + 1; i < wavData.length && bitIndex < bits.length; i += step) {
+  for (int i = headerSize; i < wavData.length && bitIndex < bits.length; i += step) {
     wavData[i] = (byte) ((wavData[i] & 0xFE) | bits[bitIndex]);
     bitIndex++;
   }
@@ -151,8 +147,8 @@ byte[] embedBitsInWav(byte[] wavData, int[] bits) {
 }
 
 void saveWav(byte[] data, String filename) throws IOException {
-  //println("debug: SAVING WAV");
-  printHeaderInfo(data);
+  //println("(DEBUG) SAVING WAV");
+  //printHeaderInfo(data);
   
   int fileSize = data.length;
   int chunkSize = fileSize - 8;
@@ -170,11 +166,7 @@ void saveWav(byte[] data, String filename) throws IOException {
   FileOutputStream fos = new FileOutputStream(sketchPath(filename));
   fos.write(data);
   fos.close();
-  
-  if (displayImage.toLowerCase().equals("true")) {
-    //OPEN THE WAVE IN AUDACITY
-  }
-  printHeaderInfo(data);
+  //printHeaderInfo(data);
 }
 
 boolean checkCapacity(byte[] wavData, int bitCount) {
@@ -186,6 +178,15 @@ boolean checkCapacity(byte[] wavData, int bitCount) {
 void printHeaderInfo(byte[] data) {
   int chunkSize = (data[7] & 0xFF) << 24 | (data[6] & 0xFF) << 16 | (data[5] & 0xFF) << 8 | (data[4] & 0xFF);
   int subchunk2Size = (data[43] & 0xFF) << 24 | (data[42] & 0xFF) << 16 | (data[41] & 0xFF) << 8 | (data[40] & 0xFF);
+  
+  int numChannels = (data[23] & 0xFF) << 8 | (data[22] & 0xFF);
+  int sampleRate = (data[27] & 0xFF) << 24 | (data[26] & 0xFF) << 16 | (data[25] & 0xFF) << 8 | (data[24] & 0xFF);
+  int bitsPerSample = (data[35] & 0xFF) << 8 | (data[34] & 0xFF);
+
   println("(DEBUG) ChunkSize: " + chunkSize);
   println("(DEBUG) Subchunk2Size: " + subchunk2Size);
+  
+  println("(DEBUG) Channels: " + numChannels);
+  println("(DEBUG) Sample rate: " + sampleRate);
+  println("(DEBUG) Bits per sample: " + bitsPerSample);
 }

@@ -73,7 +73,7 @@ ArrayList<Integer> getParts(PImage img){
     }
     return parts;
   }
-  println("Error no valid mode");
+  println("Error: no valid mode");
   return null;
 }
 
@@ -120,20 +120,18 @@ void setup()
 
   //decode it or save it to a file
   if (hasOutputFile) {
-  println("SAVING OUTPUT: " + OUTPUTFILENAME);
-  
-  if (MODE == FILE) {
-    byte[] nums = getBytes(parts);
-    saveBytes(OUTPUTFILENAME, nums);
+  //println("SAVING OUTPUT: " + OUTPUTFILENAME);
+    if (MODE == FILE) {
+      byte[] nums = getBytes(parts);
+      saveBytes(OUTPUTFILENAME, nums);
+    } else {
+      String decodedMessage = decode(parts);
+      String[] lines = {decodedMessage};
+      saveStrings(OUTPUTFILENAME, lines);
+    }
   } else {
-    String decodedMessage = decode(parts);
-    String[] lines = {decodedMessage};
-    saveStrings(OUTPUTFILENAME, lines);
+    println(decode(parts));
   }
-
-} else {
-  println(decode(parts));
-}
 }
 
 void draw(){

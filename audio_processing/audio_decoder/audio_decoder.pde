@@ -23,25 +23,33 @@ void setup() {
   }
 
   try {
-    byte[] wavData = loadWav(inputAudio);  
-    int[] headerBits = extractBitsFromWav(wavData, 56);
-  
+    byte[] wavData = loadWav(inputAudio); 
+    int maxBits = (wavData.length - 44) / 2;
+    //println("(DEBUG) Bit space in wav (w/ step = 2): " + maxBits);
+    int[] fullBitStream = extractBitsFromWav(wavData, maxBits); // extract all useful bits
+    
     int messageLength = 0;
     for (int i = 0; i < 24; i++) {
-      messageLength = (messageLength << 1) | headerBits[i];
+      messageLength = (messageLength << 1) | fullBitStream[i];
     }
+    int imageWidth = 0;
     for (int i = 0; i < 16; i++) {
-      imageWidth = (imageWidth << 1) | headerBits[24 + i];
+      imageWidth = (imageWidth << 1) | fullBitStream[24 + i];
     }
+    int imageHeight = 0;
     for (int i = 0; i < 16; i++) {
-      imageHeight = (imageHeight << 1) | headerBits[24 + 16 + i];
+      imageHeight = (imageHeight << 1) | fullBitStream[40 + i];
     }
-
-    int bitCapacity = (wavData.length - 44) / 2; 
-    println("(DEBUG) Bit space in wav (w/ step = 2): " + bitCapacity);
     
-    int[] extractedBits = extractBitsFromWav(wavData, 56 + messageLength);
-    int[] imageBits = subset(extractedBits, 56);
+    //print("(DEBUG) Header bits: ");
+    //for (int i = 0; i < 56; i++) print(fullBitStream[i]);
+    //println();
+    
+    //println("(DEBUG) Decoded image width = " + imageWidth);
+    //println("(DEBUG) Decoded image height = " + imageHeight);
+    //println("(DEBUG) Decoded messageLength = " + messageLength);
+    
+    int[] imageBits = subset(fullBitStream, 56, imageWidth * imageHeight * 24);
 
     decodedImage = bitArrayToImage(imageBits, imageWidth, imageHeight);
     decodedImage.save(outputImage);
@@ -55,11 +63,11 @@ void setup() {
 boolean parseArgs() {
   //println("(DEBUG) PARSING ARGS");
   for (int i = 0; i < args.length; i++) {
-    if (args[i].equals("-i")) {
+    if (args[i].equals("-iA")) {
       try { 
         inputAudio = args[++i]; 
       } catch(Exception e) {
-        println("-i requires .wav file path as next argument.");
+        println("-iA requires .wav file path as next argument.");
         return false;
       }
     }
@@ -96,15 +104,14 @@ byte[] loadWav(String filename) throws IOException {
 int[] extractBitsFromWav(byte[] wavData, int bitCount) {
   //println("(DEBUG) EXTRACTING BITS");
   int headerSize = 44;
-  
   int[] bits = new int[bitCount];
   int bitIndex = 0;
   int step = 2;
 
-  for (int i = headerSize + 1; i < wavData.length && bitIndex < bitCount; i += step) {
+  for (int i = headerSize; i < wavData.length && bitIndex < bitCount; i += step) {
     bits[bitIndex++] = wavData[i] & 0x01;
   }
-  println("(DEBUG) Bits extracted from wav = " + (bits.length - 56) + " should be " + imageWidth * imageHeight * 24);
+  //println("(DEBUG) Bits extracted from wav = " + (bits.length - 56) + " should be " + imageWidth * imageHeight * 24);
   return bits;
 }
 

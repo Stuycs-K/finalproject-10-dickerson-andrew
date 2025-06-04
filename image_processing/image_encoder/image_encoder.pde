@@ -50,16 +50,29 @@ void setup() {
 
   if (INPUTFILENAME.equals("")) {
     img = createImage(100, 100, RGB);
-    img.loadPixels();
   for (int i = 0; i < img.pixels.length; i++) {
-    img.pixels[i] = color(0, 0, 0);
+    img.pixels[i] = color(255, 255, 255);
   }
     img.updatePixels();
   } else {
     img = loadImage(INPUTFILENAME);
+    if (img == null) {
+      println("ERROR: Invalid input image: " + INPUTFILENAME);
+      exit();
+      return;
+    }
   }
 
   int[] parts = messageToArray(PLAINTEXT);
+  if (PLAINTEXT.isEmpty() && parts.length == 0) {
+    println("INFO: Message is empty. Output image will be unchanged.");
+  }
+  
+  if (!checkImageCapacity(img, parts)) {
+    exit();
+    return;
+  }
+  
   modifyImage(img, parts);
   img.save(OUTPUTFILENAME);
 
@@ -96,6 +109,7 @@ boolean parseArgs() {
           INPUTFILENAME = potentialPath;
         } else {
           println("WARNING: Invalid file path or file does not exist. Defaulting to plain text.");
+          //println("(DEBUG) Current directory: "+System.getProperty("user.dir"));
           INPUTFILENAME = "";
         }
       } catch(Exception e) {
@@ -103,7 +117,7 @@ boolean parseArgs() {
         return false;
       }
     }
-    if (args[i].equals("-o")) {
+    if (args[i].equals("-oI")) {
       try { 
       OUTPUTFILENAME = args[++i];
       } catch(Exception e) {
@@ -281,4 +295,60 @@ int []fileToArray(String filename) {
       e.printStackTrace();
     }
   return messageToArray(content);
+}
+
+boolean checkImageCapacity(PImage image, int[] messageArray) {
+  long requiredSlots = messageArray.length;
+  long requiredBits = requiredSlots * 2;
+
+  image.loadPixels(); 
+
+  if (image.pixels == null || image.pixels.length == 0) {
+    println("ERROR: Image has no pixel data or pixels not loaded. Width: " + image.width + ", Height: " + image.height);
+    if (image.width <= 0 || image.height <= 0) {
+      println("ERROR: Image dimensions are invalid. Input file might be missing or corrupted.");
+    }
+    return false;
+  }
+
+  if (MODE == GREEDY) {
+    long totalPixelSlots = (long)image.width * image.height;
+    long slotsForTermination = 4;
+    long availableSlotsForMessage = totalPixelSlots - slotsForTermination;
+    long availableBitsForMessage = availableSlotsForMessage * 2;
+
+    if (requiredBits > availableBitsForMessage) {
+      println("ERROR: The message is too large to embed in the provided image using GREEDY mode.");
+      //println("(DEBUG) Bits required for message: " + requiredBits + " (" + requiredSlots + " 2-bit parts)");
+      //println("(DEBUG) Bits available in image (excluding termination): " + availableBitsForMessage + " (" + availableSlotsForMessage + " 2-bit parts)");
+      //println("(DEBUG) Total image pixels: " + totalPixelSlots + ". Pixels for termination: " + slotsForTermination);
+      return false;
+    }
+  } else if (MODE == SELECTIVE || MODE == FILE) {
+    long usablePixelSlots = 0;
+    for (int i = 0; i < image.pixels.length; i++) {
+      int r = (int)red(image.pixels[i]);
+      int g = (int)green(image.pixels[i]);
+      if ((r & 0x03) == 0 && (g & 0x03) == 0) {
+        usablePixelSlots++;
+      }
+    }
+    
+    long availableSlotsForMessage = usablePixelSlots;
+    long availableBitsForMessage = availableSlotsForMessage * 2;
+
+    if (requiredBits > availableBitsForMessage) {
+      println("ERROR: The message is too large to embed in the provided image using SELECTIVE/FILE mode.");
+      //println("(DEBUG) Bits required for message: " + requiredBits + " (" + requiredSlots + " 2-bit parts)");
+      //println("(DEBUG) Bits available in qualifying pixels: " + availableBitsForMessage + " (" + availableSlotsForMessage + " 2-bit parts)");
+      //println("(DEBUG) Total image pixels: " + image.pixels.length + ". Qualifying pixels found: " + usablePixelSlots);
+      return false;
+    }
+    if (usablePixelSlots == 0 && requiredSlots > 0) {
+      println("ERROR: No qualifying pixels found in the image for SELECTIVE/FILE mode, but message is not empty.");
+      //println("(DEBUG) Bits required for message: " + requiredBits + " (" + requiredSlots + " 2-bit parts)");
+      return false;
+    }
+  }
+  return true;
 }

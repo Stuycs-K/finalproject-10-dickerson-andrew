@@ -92,3 +92,11 @@ This document must be updated daily every time you finish a work session.
 - Fixed issue where wav file could be too small to contain image.
 - Added encoding image dimensions into audio file to remove -w and -h flags.
 - Began fixing issue where encoded wav file is not valid wav file.
+
+### 2025-06-3 - Debugging and final submission.
+- Wrote test cases for full encoder and full decoder.
+- Fixed issue where encoded wav file was not detected as valid wav file by programs like audacity.
+- Fixed issue where image dimensions were not being encoded properly.
+- Fixed issue where default blank image would not properly contain encoded information.
+- Completed presentation outline in `presenation.md`
+- Recorded final presentation video.

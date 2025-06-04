@@ -74,6 +74,17 @@ make image_decode:
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
+** Image Diff ** – Highlights pixel differences between two provided images.
+make image_diff:
+- -o : path to the original image (default = "cat.png")
+- -m : path to the modified image (default = "modifiedCat.png")
+Press any key to cycle through modes:
+- DEFAULT: shows original image (img1)
+- DIFF: highlights any differing pixels in magenta
+- DIFF_R: highlights red channel differences in red
+- DIFF_G: highlights green channel differences in green
+- DIFF_B: highlights blue channel differences in blue
+
 **Audio Encoder** - Hides message from plaintext or file in an audio file.
 make audio_encode:
 - -iP : input image path (default = "encoded.png")
@@ -86,6 +97,12 @@ make audio_decode:
 - -iA : input audio path (default = "obv.wav")
 - -oA : output image path (default = "encoded.png")
 - -dA : display image after encoding ("true"/"false", default = "false")
+
+** Audio Diff ** – Compares two .wav files at the byte level and reports the total number of bit differences.
+make audio_diff:
+- -o : original WAV file path (default = "audio.wav")
+- -m : modified WAV file path (default = "audio_modified.wav")
+- -v : (optional) "true" enables verbose mode, which prints bit differences within each differing byte (default = "false")
 
 **Clean** - Removes default generated output files.
 - No flags, just run `make clean`.
@@ -101,3 +118,4 @@ For Example Make Commands, see `examples/ex_make_commands`
 - https://docs.fileformat.com/audio/wav/
 - https://blog.fileformat.com/audio/understanding-the-wav-file-header-structure-format-and-how-to-repair/
 - http://soundfile.sapp.org/doc/WaveFormat/
+- https://yout.com/
