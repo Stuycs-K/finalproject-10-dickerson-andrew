@@ -1,1 +1,1 @@
-funnymessagehere
+This is a plain text secret message
