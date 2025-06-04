@@ -74,7 +74,7 @@ make image_decode:
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
-** Image Diff ** – Highlights pixel differences between two provided images.
+**Image Diff** – Highlights pixel differences between two provided images.
 make image_diff:
 - -o : path to the original image (default = "cat.png")
 - -m : path to the modified image (default = "modifiedCat.png")
@@ -98,7 +98,7 @@ make audio_decode:
 - -oA : output image path (default = "encoded.png")
 - -dA : display image after encoding ("true"/"false", default = "false")
 
-** Audio Diff ** – Compares two .wav files at the byte level and reports the total number of bit differences.
+**Audio Diff** – Compares two .wav files at the byte level and reports the total number of bit differences.
 make audio_diff:
 - -o : original WAV file path (default = "audio.wav")
 - -m : modified WAV file path (default = "audio_modified.wav")
