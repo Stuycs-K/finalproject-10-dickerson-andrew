@@ -17,16 +17,16 @@
 ## Full Decoder (Runs both image and audio decoders on the same args):
 1. Decodes the image, `../../examples/output/audio_decoded.png`, from the wav file `../../examples/output/audio_encoded.wav`. Then decodes the message embeded within the decoded image result, `../../examples/output/image_encoded.png`, which is not automatically displayed. The final decoded message found using the `GREEDY` mode, and is stored in the file `../../examples/output/image_decoded.txt`.
 
-> make decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -iI ../../examples/output/image_encoded.png -oI ../../examples/output/image_decoded.txt -m GREEDY"
+> make decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -dA TRUE -iI ../../examples/output/image_encoded.png -oI ../../examples/output/image_decoded.txt -m GREEDY"
 
 2. Decodes the image, `../../examples/output/audio_decoded.png`, from the wav file `../../examples/output/audio_encoded.wav`. Then decodes the message embeded within the decoded image result, `../../examples/output/image_encoded.png`, which is not automatically displayed. The final decoded message found using the `SELECTIVE` mode, and is stored in the file `../../examples/output/image_decoded.txt`.
 
-> make decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -iI ../../examples/output/image_encoded.png -oI ../../examples/output/image_decoded.txt -m GREEDY"
+> make decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -dA TRUE -iI ../../examples/output/image_encoded.png -oI ../../examples/output/image_decoded.txt -m GREEDY"
 
 
 3. Decodes the image, `../../examples/output/audio_decoded.png`, from the wav file `../../examples/output/audio_encoded.wav`. Then decodes the message embeded within the decoded image result, `../../examples/output/image_encoded.png`, which is not automatically displayed. The final decoded message found using the `GREEDY` mode, and is stored in the file `../../examples/output/image_decoded.txt`.
 
-> make decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -iI ../../examples/output/image_encoded.png -oI ../../examples/output/image_decoded.txt -m GREEDY"
+> make decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -dA TRUE -iI ../../examples/output/image_encoded.png -oI ../../examples/output/image_decoded.txt -m GREEDY"
 
 
 ## Image Encoder:
@@ -81,13 +81,13 @@
 
 ## Audio Decoder:
 1. Encoded Cat from solar:
-> make audio_decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png"
+> make audio_decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -dA TRUE"
 
 2. Blank from Silent:
-> make audio_decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png"
+> make audio_decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -dA TRUE"
 
 3. Rainbow from solar:
-> make audio_decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png"
+> make audio_decode ARGS="-iA ../../examples/output/audio_encoded.wav -oA ../../examples/output/audio_decoded.png -dA TRUE"
 
 
 ## Audio Diff:
