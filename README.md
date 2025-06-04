@@ -19,7 +19,7 @@ The decoder works essentially by doing everything in reverse. It takes the alter
 
 The user runs the program by executing a make command for the respective program they are attempting to run.
 
-Example make commands have been provided in `examples/example_make_commands.txt`.
+Example make commands have been provided in `example_make_commands.txt`.
 
 These example commands use example files that are also located in the `examples` directory.
 
