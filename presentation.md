@@ -188,15 +188,19 @@
 
 
 13. Full encoder
+
 	a. Review of functionality of full encoder.
-		Hides message from plaintext or file in an image and then hides that image in an audio file.
+	
+ 	Hides message from plaintext or file in an image and then hides that image in an audio file.
 
 	b. Running test cases from `example_make_commands`.
 
 
 7. Full decoder
+
 	a. Review of functionality of full decoder.
-		Finds an image hidden in an audio file, and then the message hidden in that image.
+
+	Finds an image hidden in an audio file, and then the message hidden in that image.
 	
 	b. Running test cases from `example_make_commands`.
 
