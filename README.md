@@ -19,7 +19,7 @@ The decoder works essentially by doing everything in reverse. It takes the alter
 
 The user runs the program by executing a make command for the respective program they are attempting to run.
 
-Example make commands have been provided in `examples/ex_make_commands.txt`.
+Example make commands have been provided in `examples/example_make_commands.txt`.
 
 These example commands use example files that are also located in the `examples` directory.
 
@@ -48,13 +48,11 @@ make encode:
 - -iP : input image path for audio_encoder (default = "encoded.png")
 - -iA : input image path for audio_encoder  (default = "oxp.wav")
 - -oA : output audio path for audio_encoder  (default = "encoded.wav")
-- -dA : display wave after encoding ("true"/"false", default = "false")
 
 **Full Decoder** - Finds an image hidden in an audio file, and then the message hidden in that image.
 make decode:
 - -iA : input audio path for audio_encoder (default = "obv.wav")
 - -oA : output image path for audio_encoder (default = "encoded.png")
-- -dA : display image after encoding ("true"/"false", default = "false")
 
 - -iI : input image path for image_encoder (default = none, a blank, white image will be generated for use instead)
 - -oI : output decoded path for image_encoder (default = "encoded.png")
@@ -76,7 +74,7 @@ make image_decode:
 - -m : mode of encryption ("GREEDY", "SELECTIVE", or "FILE", default = "GREEDY")
 - -b : (optional) number of bits the message is known to take up (helps with SELECTIVE and FILE decoding modes)
 
-** Image Diff ** – Highlights pixel differences between two provided images.
+**Image Diff** – Highlights pixel differences between two provided images.
 make image_diff:
 - -o : path to the original image (default = "cat.png")
 - -m : path to the modified image (default = "modifiedCat.png")
@@ -92,15 +90,13 @@ make audio_encode:
 - -iP : input image path (default = "encoded.png")
 - -iA : input image path (default = "oxp.wav")
 - -oA : output audio path (default = "encoded.wav")
-- -dA : display wave after encoding ("true"/"false", default = "false")
 
 **Audio Decoder** - Finds a message hidden in an audio file.
 make audio_decode:
 - -iA : input audio path (default = "obv.wav")
 - -oA : output image path (default = "encoded.png")
-- -dA : display image after encoding ("true"/"false", default = "false")
 
-** Audio Diff ** – Compares two .wav files at the byte level and reports the total number of bit differences.
+**Audio Diff** – Compares two .wav files at the byte level and reports the total number of bit differences.
 make audio_diff:
 - -o : original WAV file path (default = "audio.wav")
 - -m : modified WAV file path (default = "audio_modified.wav")
@@ -109,7 +105,7 @@ make audio_diff:
 **Clean** - Removes default generated output files.
 - No flags, just run `make clean`.
 
-For Example Make Commands, see `examples/ex_make_commands`
+For Example Make Commands, see `examples/example_make_commands`
 
 ### Resources/ References:
 

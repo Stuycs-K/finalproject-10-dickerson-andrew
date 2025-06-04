@@ -1,15 +1,20 @@
 # Presentation Outline
 1. Contents of `README.md`:
+
 	a. Project Description / Overview
-	b. Instructions
-	c. Flags for each sketch
+	
+ 	b. Instructions
+	
+ 	c. Flags for each sketch
+
 	d. References
 
-2. `image_encoder`
+4. `image_encoder`
 	a. Review of Functionality of `image_encoder`.
 		Takes a message in the form of plaintext or a TXT file path and encodes an image with a hidden message using least significant bit (LSB) encoding.
 	
 	b. Changes necessary for compatability with `audio_encoder`.
+
 		i. checkImageCapacity():
 			- Prevents encoding if the message exceeds the available embedding space.
 
@@ -31,11 +36,12 @@
 	
 	c. Running test cases from `example_make_commands`.
 
-3. `audio_encoder`
+5. `audio_encoder`
 	a. Introduction to functionality of `image_encoder`.
 		This sketch takes a PNG image that is already encoded with a hidden message and embeds the pixels of this image into the LSBs of a WAV audio file.
 	
-	b. General process by which `audio_encoder` embeds the image data within a wav file. 
+	b. General process by which `audio_encoder` embeds the image data within a wav file.
+
 		i. Passing Command-Line Arguments into Global Variablese(parseArgs)
 			- See flag info and usage in `README.md`.
 
@@ -71,11 +77,12 @@
 	c. Running test cases from `example_make_commands`.
 
 
-4. `audio_diff`
+6. `audio_diff`
 	a. Review of functionality of `audio_diff`.
 		This sketch takes two WAV audio files and prints the number of bit differences between them.
 	
-	b. General process by which `audio_diff` finds the bit differences between two audio files. 
+	b. General process by which `audio_diff` finds the bit differences between two audio files.
+
 		i. Passing Command-Line Arguments into Global Variables (parseArgs)
 			- See flag info and usage in `README.md`.
 
@@ -105,11 +112,12 @@
 	c. Running test cases from `example_make_commands`.
 	
 
-5. `audio_decoder`
+8. `audio_decoder`
 	a. Introduction to functionality of `image_encoder`.
 		This sketch takes a PNG image that is already encoded with a hidden message and embeds the pixels of this image into the least significant bits of a WAV audio file.
 	
-	b. General process by which `audio_decoder` retrieves the image data from the wav file. 
+	b. General process by which `audio_decoder` retrieves the image data from the wav file.
+
 		i. Passing Command-Line Arguments into Global Variables (parseArgs)
 			- See flag info and usage in `README.md`.
 
@@ -146,18 +154,19 @@
 	c. Running test cases from `example_make_commands`.
 
 
-6. `image_diff`
+10. `image_diff`
 	a. Review of functionality of `image_diff`.
 		Highlights pixel differences between two provided images.
 
 	b. Running test cases from `example_make_commands`.
 
 
-7. `image_decoder`
+11. `image_decoder`
 	a. Review of functionality of `image_decoder`.
 		Extracts and decodes a hidden message or file from an image's pixel data using a selected encoding mode (GREEDY, SELECTIVE, or FILE).
 	
 	b. Changes made for compatability with `audio_decoder`.
+
 		i. Added Terminator Byte for GREEDY Mode
 			- A termination condition was added for GREEDY mode: if a byte with the value 255 is encountered during decoding, it is treated as the end of the message and decoding halts. This ensures GREEDY-mode messages do not contain lingering null or garbage values when interpreted by audio_decoder.
 
@@ -178,16 +187,20 @@
 	c. Running test cases from `example_make_commands`.
 
 
-8. Full encoder
+13. Full encoder
+
 	a. Review of functionality of full encoder.
-		Hides message from plaintext or file in an image and then hides that image in an audio file.
+	
+ 	Hides message from plaintext or file in an image and then hides that image in an audio file.
 
 	b. Running test cases from `example_make_commands`.
 
 
 7. Full decoder
+
 	a. Review of functionality of full decoder.
-		Finds an image hidden in an audio file, and then the message hidden in that image.
+
+	Finds an image hidden in an audio file, and then the message hidden in that image.
 	
 	b. Running test cases from `example_make_commands`.
 
