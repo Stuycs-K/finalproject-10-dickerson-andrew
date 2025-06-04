@@ -10,6 +10,7 @@
 	d. References
 
 4. `image_encoder`
+
 	a. Review of Functionality of `image_encoder`.
 		Takes a message in the form of plaintext or a TXT file path and encodes an image with a hidden message using least significant bit (LSB) encoding.
 	
@@ -36,7 +37,8 @@
 	
 	c. Running test cases from `example_make_commands`.
 
-5. `audio_encoder`
+6. `audio_encoder`
+
 	a. Introduction to functionality of `image_encoder`.
 		This sketch takes a PNG image that is already encoded with a hidden message and embeds the pixels of this image into the LSBs of a WAV audio file.
 	
@@ -77,7 +79,8 @@
 	c. Running test cases from `example_make_commands`.
 
 
-6. `audio_diff`
+8. `audio_diff`
+
 	a. Review of functionality of `audio_diff`.
 		This sketch takes two WAV audio files and prints the number of bit differences between them.
 	
@@ -112,7 +115,8 @@
 	c. Running test cases from `example_make_commands`.
 	
 
-8. `audio_decoder`
+10. `audio_decoder`
+
 	a. Introduction to functionality of `image_encoder`.
 		This sketch takes a PNG image that is already encoded with a hidden message and embeds the pixels of this image into the least significant bits of a WAV audio file.
 	
@@ -154,14 +158,16 @@
 	c. Running test cases from `example_make_commands`.
 
 
-10. `image_diff`
+12. `image_diff`
+
 	a. Review of functionality of `image_diff`.
 		Highlights pixel differences between two provided images.
 
 	b. Running test cases from `example_make_commands`.
 
 
-11. `image_decoder`
+14. `image_decoder`
+
 	a. Review of functionality of `image_decoder`.
 		Extracts and decodes a hidden message or file from an image's pixel data using a selected encoding mode (GREEDY, SELECTIVE, or FILE).
 	
@@ -187,7 +193,7 @@
 	c. Running test cases from `example_make_commands`.
 
 
-13. Full encoder
+16. Full encoder
 
 	a. Review of functionality of full encoder.
 	
