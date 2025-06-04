@@ -46,13 +46,11 @@ make encode:
 - -iP : input image path for audio_encoder (default = "encoded.png")
 - -iA : input image path for audio_encoder  (default = "oxp.wav")
 - -oA : output audio path for audio_encoder  (default = "encoded.wav")
-- -dA : display wave after encoding ("true"/"false", default = "false")
 
 **Full Decoder** - Finds an image hidden in an audio file, and then the message hidden in that image.
 make decode:
 - -iA : input audio path for audio_encoder (default = "obv.wav")
 - -oA : output image path for audio_encoder (default = "encoded.png")
-- -dA : display image after encoding ("true"/"false", default = "false")
 
 - -iI : input image path for image_encoder (default = none, a blank, white image will be generated for use instead)
 - -oI : output decoded path for image_encoder (default = "encoded.png")
@@ -90,13 +88,11 @@ make audio_encode:
 - -iP : input image path (default = "encoded.png")
 - -iA : input image path (default = "oxp.wav")
 - -oA : output audio path (default = "encoded.wav")
-- -dA : display wave after encoding ("true"/"false", default = "false")
 
 **Audio Decoder** - Finds a message hidden in an audio file.
 make audio_decode:
 - -iA : input audio path (default = "obv.wav")
 - -oA : output image path (default = "encoded.png")
-- -dA : display image after encoding ("true"/"false", default = "false")
 
 **Audio Diff** – Compares two .wav files at the byte level and reports the total number of bit differences.
 make audio_diff:
